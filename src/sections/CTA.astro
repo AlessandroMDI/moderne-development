@@ -1,0 +1,68 @@
+---
+import Button from '../components/Button.astro';
+---
+
+<section id="cta" class="bg-brand-green scroll-mt-14 lg:scroll-mt-16 px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
+  <div class="max-w-[1280px] mx-auto">
+
+    <div class="flex flex-col items-center text-center">
+
+      <!-- Headline -->
+      <h2 class="font-display leading-none tracking-tight uppercase mb-6 lg:mb-8">
+        <span class="block text-[40px] md:text-[60px] lg:text-[80px] text-white">Ready to Build</span>
+        <span class="block text-[40px] md:text-[60px] lg:text-[80px] text-brand-gold">What's Next?</span>
+      </h2>
+
+      <!-- Supporting copy -->
+      <p class="font-sans text-sm md:text-base text-white/60 leading-relaxed max-w-[560px] mb-10 lg:mb-12">
+        Developer, builder, or investor — if you're done with the old way of building, reach out.
+      </p>
+
+      <!-- Audience cards -->
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 lg:mb-12 max-w-[800px]">
+
+        <!-- Card: Developers & Builders -->
+        <div class="border border-white/20 p-6 text-left">
+          <h3 class="font-sans text-base font-semibold text-white mb-2">Developers &amp; Builders</h3>
+          <p class="font-sans text-sm text-white/60 leading-relaxed">
+            Deploy MDOS on your next development. We come in early, validate in the field, and build from there.
+          </p>
+        </div>
+
+        <!-- Card: Investors & Partners -->
+        <div class="border border-white/20 p-6 text-left">
+          <h3 class="font-sans text-base font-semibold text-white mb-2">Investors &amp; Partners</h3>
+          <p class="font-sans text-sm text-white/60 leading-relaxed">
+            MDI is actively forming its first-round partner and capital network. If the timing is right, get in touch.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        <div class="btn-3d-wrapper w-full sm:w-auto">
+          <div class="btn-3d-depth"></div>
+          <div class="btn-3d-left"></div>
+          <div class="btn-3d-bottom"></div>
+          <button
+            data-contact-trigger
+            class="btn-3d-face bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 w-full sm:w-auto block text-center"
+          >
+            Get in Touch
+          </button>
+        </div>
+        <Button href="#platform" variant="secondary" fullWidthMobile={true}>Learn About MDOS &rarr;</Button>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-16 pt-8 border-t border-white/10 w-full">
+        <p class="font-sans text-[11px] text-white/30 tracking-wide">
+          &copy; {new Date().getFullYear()} MDI &mdash; Moderne Development, Inc.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>

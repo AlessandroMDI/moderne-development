@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import edgarImg from '../assets/images/team/edgar-munoz.jpg';
+import alessandroImg from '../assets/images/team/alessandro-lannes.jpg';
+import robertImg from '../assets/images/team/robert-mechielsen.jpg';
+import danielImg from '../assets/images/team/daniel-white.jpg';
+import zackaryImg from '../assets/images/team/zackary-howley.jpg';
+import paulCejasImg from '../assets/images/team/paul-cejas.jpg';
+import jamesImg from '../assets/images/team/james-guiang.jpg';
+import paulGroeplerImg from '../assets/images/team/paul-groepler.jpg';
+import cristianImg from '../assets/images/team/cristian-perez.jpg';
+
+const team = [
+  {
+    img: edgarImg,
+    name: 'Edgar Munoz',
+    title: 'Founder / CEO',
+    bio: 'Ten-plus years in construction technology — former CEO of Aeronyde Corporation, Head of Business Development at Apis Cor, and a sitting ASTM Additive Construction Committee member. Has raised thirteen million dollars across early-stage ventures.',
+  },
+  {
+    img: alessandroImg,
+    name: 'Alessandro Lannes',
+    title: 'Founder / COO',
+    bio: 'Operations engineering and platform consulting. Helped a B2C business grow from twenty million to one hundred million dollars in eighteen months.',
+  },
+  {
+    img: robertImg,
+    name: 'Robert Mechielsen',
+    title: 'Innovation Director',
+    bio: 'Thirty-plus years designing modular, smart, and net-zero buildings across global markets. Founder of VERTIKAAL (5D BIM software). Designed the Hi\'ilani EcoHouse — the first concrete-built carbon-neutral home in the USA.',
+  },
+  {
+    img: danielImg,
+    name: 'Daniel White',
+    title: 'Sales Director',
+    grayscale: true,
+    bio: 'Twenty-plus years in medical devices, manufacturing, and distribution. Managed teams of up to forty-five sales representatives.',
+  },
+  {
+    img: zackaryImg,
+    name: 'Zackary Howley',
+    title: 'Construction Director',
+    grayscale: true,
+    bio: 'General Contractor for the first Apis Cor 3D-printed model home in Florida, with project credits at Blue Origin and SpaceX Launchpad 39A. One of Florida\'s youngest licensed crane operators.',
+  },
+  {
+    img: paulCejasImg,
+    name: 'Paul Cejas',
+    title: 'Board Member',
+    bio: 'Former Chief Engineer at Boeing Defense Systems, where he led development of the QF-16 target drone and MQ-28 Ghost Bat. Now consulting for green technology startups.',
+  },
+  {
+    img: jamesImg,
+    name: 'James Guiang',
+    title: 'Board of Directors',
+    bio: 'Geophysicist with forty-plus years in oil and gas — Exxon, Amerada Hess, and Conoco. Spent twenty-five years as an investment manager, including a tenure as Managing Director at Millennium Global Investments.',
+  },
+  {
+    img: paulGroeplerImg,
+    name: 'Paul Groepler',
+    title: 'Investor / Board',
+    grayscale: true,
+    bio: 'Thirty-plus years across Fortune 500 companies including Motorola, Dell, and IBM. Co-founded seven ventures. B.S. Texas A&M, Master\'s in Data Science & Economics from MIT.',
+  },
+  {
+    img: cristianImg,
+    name: 'Cristian Perez',
+    title: '3D Visualizer',
+    grayscale: true,
+    bio: '',
+  },
+];
+---
+
+<section id="team" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16 px-5 pt-12 pb-16 md:px-10 md:pt-14 md:pb-20 lg:px-20 lg:pt-20 lg:pb-28">
+  <div class="max-w-[1280px] mx-auto">
+
+    <!-- Section header -->
+    <div class="mb-12 lg:mb-16">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="block w-6 h-px bg-brand-gold"></span>
+        <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Team</span>
+      </div>
+      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
+        The People <span class="text-brand-gold">Behind MDI.</span>
+      </h2>
+    </div>
+
+    <!-- Team grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 lg:gap-x-8 lg:gap-y-10">
+      {team.map((member) => (
+        <div class="flex flex-col">
+
+          <Image
+            src={member.img}
+            alt={member.name + ', ' + member.title}
+            widths={[200, 320, 480]}
+            sizes="(max-width: 768px) 40vw, 25vw"
+            loading="lazy"
+            quality={80}
+            class:list={['aspect-square w-full object-cover object-top mb-3', member.grayscale ? 'grayscale' : '']}
+          />
+
+          <!-- Name -->
+          <p class="font-sans text-sm lg:text-base font-semibold text-text-primary leading-snug">{member.name}</p>
+
+          <!-- Title -->
+          <p class="font-sans text-[11px] text-text-secondary uppercase tracking-widest mt-1 mb-3">{member.title}</p>
+
+          <!-- Bio -->
+          {member.bio && (
+            <p class="font-sans text-sm text-text-secondary leading-relaxed">{member.bio}</p>
+          )}
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

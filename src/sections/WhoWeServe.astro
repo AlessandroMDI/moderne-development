@@ -1,0 +1,110 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const audiences = [
+  {
+    icon: 'lucide:building-2',
+    title: 'Real Estate Developers',
+    body: 'Developers need speed without losing control. MDOS takes a project from land screening to build-ready BIM in a single pipeline: AI feasibility analysis, automated cost estimates, robotic construction sequences. All of it generated before a shovel hits the ground.',
+  },
+  {
+    icon: 'lucide:wrench',
+    title: 'Contractors & Builders',
+    body: 'Builders who partner with MDI get BIM files that translate directly into robotic print sequences and prefab specifications. No re-authoring between design and construction. What used to require eight to twelve workers over two weeks now takes two to four operators in five days.',
+  },
+  {
+    icon: 'lucide:landmark',
+    title: 'Institutional Partners',
+    body: 'Housing agencies, government programs, and institutional investors who need residential delivery at volume. MDI\'s "Design Once, Deploy Many" model means thousands of units can move forward without rebuilding the process each time.',
+  },
+];
+---
+
+<section id="who-we-serve" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16 px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
+  <div class="max-w-[1280px] mx-auto">
+
+    <!-- Section header: two-column on lg -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 mb-14 lg:mb-20">
+
+      <div>
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-3 mb-5">
+          <span class="block w-6 h-px bg-brand-gold"></span>
+          <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Who We Serve</span>
+        </div>
+
+        <h2 class="font-display text-[36px] md:text-[44px] lg:text-[52px] leading-none tracking-tight uppercase text-text-primary">
+          Built for the People<br />
+          <span class="text-brand-gold">Who Build.</span>
+        </h2>
+      </div>
+
+      <div class="lg:pt-2 flex flex-col justify-center">
+        <p class="font-sans text-base text-text-primary leading-relaxed max-w-[520px]">
+          MDI works across the full chain: developers who control the land, builders running the site, and institutional partners moving at volume. The platform is built around their actual constraints, not a product looking for a use case.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Audience cards: strip with fading edge shadows -->
+    <div class="audience-strip grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-text-divider">
+      {audiences.map((a, i) => (
+        <div class:list={[
+          'py-10 lg:py-12 px-8',
+          i === 0 ? 'pl-0 md:pl-0' : '',
+          i === audiences.length - 1 ? 'pr-0 md:pr-0' : '',
+          i < audiences.length - 1 ? 'border-b md:border-b-0 md:border-r border-text-divider' : '',
+        ]}>
+
+          <!-- Icon -->
+          <div class="text-brand-gold mb-5">
+            <Icon name={a.icon} class="w-8 h-8" />
+          </div>
+
+          <!-- Title -->
+          <h3 class="font-sans text-xl font-semibold text-text-primary mb-4 leading-snug">{a.title}</h3>
+
+          <!-- Body -->
+          <p class="font-sans text-base text-text-secondary leading-relaxed">{a.body}</p>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .audience-strip {
+    position: relative;
+    overflow: visible;
+  }
+
+  /*
+    Pseudo-elements sit just outside the border lines.
+    Radial gradient: strong in the center horizontally, fades to transparent
+    before reaching the left/right edges — creating the "floating strip" look.
+  */
+  .audience-strip::before,
+  .audience-strip::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 48px;
+    pointer-events: none;
+  }
+
+  /* shadow bleeding upward from the top border */
+  .audience-strip::before {
+    bottom: 100%;
+    background: radial-gradient(ellipse 40% 100% at 50% 100%, rgba(0, 0, 0, 0.14) 0%, transparent 100%);
+  }
+
+  /* shadow bleeding downward from the bottom border */
+  .audience-strip::after {
+    top: 100%;
+    background: radial-gradient(ellipse 40% 100% at 50% 0%, rgba(0, 0, 0, 0.14) 0%, transparent 100%);
+  }
+</style>

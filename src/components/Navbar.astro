@@ -1,0 +1,183 @@
+---
+const navLinks = [
+  { label: 'What We Do', href: '#what-we-do' },
+  { label: 'Platform', href: '#platform' },
+  { label: 'Who We Serve', href: '#who-we-serve' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Team', href: '#team' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 bg-brand-green h-14 lg:h-16">
+  <div class="max-w-[1280px] mx-auto h-full px-5 md:px-10 lg:px-20 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex-shrink-0" aria-label="Moderne Development Inc. — home">
+      <svg class="logo-nav h-8 lg:h-9 w-auto" version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251 124" aria-hidden="true">
+        <defs>
+          <radialGradient id="nav-g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(12.72,0,0,12.72,234.89,18.12)">
+            <stop offset=".03" stop-color="#eed688"/>
+            <stop offset=".5" stop-color="#ebbb10"/>
+            <stop offset="1" stop-color="#c3922e"/>
+          </radialGradient>
+        </defs>
+        <path fill="white" d="m114.89 33.75c-2.57-2.57-5.66-4.61-9.17-6.08-3.52-1.46-7.37-2.2-11.44-2.2h-12.57c-3.4 0-6.78 0.52-10.06 1.55q-3.71 1.18-6.96 3.42-3.16-2.24-6.83-3.42c-3.24-1.03-6.61-1.56-10.01-1.56h-42.31v91.64h23.93q0.24-28.26 0.48-56.51c5.31-3.29 9.96-6.15 14.39-8.91 2.05-1.28 4.65-2.78 6.52-1.75 1.38 0.76 1.81 2.59 1.96 3.77v63.4h23.92q0.02-28.2 0.05-56.39c5.49-3.62 10.21-6.54 13.93-8.78 2.36-1.42 5.08-2.9 6.87-1.8 1.2 0.74 1.53 2.36 1.63 3.49q0.01 31.75 0.03 63.49h23.93v-62.75c0-4.07-0.74-7.91-2.2-11.44-1.46-3.51-3.5-6.59-6.08-9.17z"/>
+        <path fill="white" d="m204.98 33.93c-2.61-2.6-5.7-4.68-9.2-6.18-3.53-1.51-7.31-2.28-11.23-2.28h-54.28v91.64h54.28c4.01 0 7.81-0.77 11.31-2.29 3.45-1.5 6.52-3.58 9.12-6.18 2.6-2.6 4.67-5.67 6.18-9.12 1.51-3.49 2.28-7.3 2.28-11.31v-33.86c0-3.92-0.77-7.7-2.28-11.24-1.5-3.5-3.58-6.59-6.18-9.18zm-15.47 20.43v33.86c0 1.4-0.46 2.52-1.45 3.51-0.99 0.99-2.11 1.45-3.51 1.45h-30.36v-43.78h30.36c1.4 0 2.52 0.46 3.51 1.45 0.99 0.99 1.45 2.11 1.45 3.51z"/>
+        <path fill-rule="evenodd" fill="white" d="m232.94 36.99v-11.52h-12.41v91.64h23.93v-80.12h-11.52z"/>
+        <path fill="url(#nav-g1)" d="m236.6 25.48h7.86v7.86h-7.86zm0-11.29h7.86v7.86h-7.86zm0-11.3h7.86v7.86h-7.86zm-11.29 11.3h7.86v7.86h-7.86z"/>
+      </svg>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="font-sans text-xs font-medium tracking-widest uppercase text-white/80 hover:text-white transition-colors duration-150"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop CTA button -->
+    <span class="hidden lg:inline-block btn-3d-wrapper">
+      <span class="btn-3d-depth" aria-hidden="true"></span>
+      <span class="btn-3d-left" aria-hidden="true"></span>
+      <span class="btn-3d-bottom" aria-hidden="true"></span>
+      <a
+        href="#cta"
+        class="btn-3d-face inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3"
+      >
+        Get Started
+      </a>
+    </span>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-open"
+      class="lg:hidden w-11 h-11 flex items-center justify-center text-white"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-50 bg-brand-green hidden flex-col"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+>
+  <!-- Overlay top bar -->
+  <div class="h-14 flex items-center justify-between px-5">
+    <a href="#hero" class="flex-shrink-0" aria-label="Moderne Development Inc. — home">
+      <svg class="h-8 w-auto" version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251 124" aria-hidden="true">
+        <defs>
+          <radialGradient id="mob-g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(12.72,0,0,12.72,234.89,18.12)">
+            <stop offset=".03" stop-color="#eed688"/>
+            <stop offset=".5" stop-color="#ebbb10"/>
+            <stop offset="1" stop-color="#c3922e"/>
+          </radialGradient>
+        </defs>
+        <path fill="white" d="m114.89 33.75c-2.57-2.57-5.66-4.61-9.17-6.08-3.52-1.46-7.37-2.2-11.44-2.2h-12.57c-3.4 0-6.78 0.52-10.06 1.55q-3.71 1.18-6.96 3.42-3.16-2.24-6.83-3.42c-3.24-1.03-6.61-1.56-10.01-1.56h-42.31v91.64h23.93q0.24-28.26 0.48-56.51c5.31-3.29 9.96-6.15 14.39-8.91 2.05-1.28 4.65-2.78 6.52-1.75 1.38 0.76 1.81 2.59 1.96 3.77v63.4h23.92q0.02-28.2 0.05-56.39c5.49-3.62 10.21-6.54 13.93-8.78 2.36-1.42 5.08-2.9 6.87-1.8 1.2 0.74 1.53 2.36 1.63 3.49q0.01 31.75 0.03 63.49h23.93v-62.75c0-4.07-0.74-7.91-2.2-11.44-1.46-3.51-3.5-6.59-6.08-9.17z"/>
+        <path fill="white" d="m204.98 33.93c-2.61-2.6-5.7-4.68-9.2-6.18-3.53-1.51-7.31-2.28-11.23-2.28h-54.28v91.64h54.28c4.01 0 7.81-0.77 11.31-2.29 3.45-1.5 6.52-3.58 9.12-6.18 2.6-2.6 4.67-5.67 6.18-9.12 1.51-3.49 2.28-7.3 2.28-11.31v-33.86c0-3.92-0.77-7.7-2.28-11.24-1.5-3.5-3.58-6.59-6.18-9.18zm-15.47 20.43v33.86c0 1.4-0.46 2.52-1.45 3.51-0.99 0.99-2.11 1.45-3.51 1.45h-30.36v-43.78h30.36c1.4 0 2.52 0.46 3.51 1.45 0.99 0.99 1.45 2.11 1.45 3.51z"/>
+        <path fill-rule="evenodd" fill="white" d="m232.94 36.99v-11.52h-12.41v91.64h23.93v-80.12h-11.52z"/>
+        <path fill="url(#mob-g1)" d="m236.6 25.48h7.86v7.86h-7.86zm0-11.29h7.86v7.86h-7.86zm0-11.3h7.86v7.86h-7.86zm-11.29 11.3h7.86v7.86h-7.86z"/>
+      </svg>
+    </a>
+
+    <button
+      id="nav-close"
+      class="w-11 h-11 flex items-center justify-center text-white"
+      aria-label="Close menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <line x1="4" y1="4" x2="20" y2="20"/>
+        <line x1="20" y1="4" x2="4" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Links -->
+  <nav class="flex-1 flex flex-col items-center justify-center gap-2 px-5" aria-label="Mobile navigation">
+    {navLinks.map(link => (
+      <a
+        href={link.href}
+        class="mobile-nav-link w-full text-center font-display text-[36px] text-white uppercase tracking-tight leading-none py-4 border-t border-white/10 first:border-t-0 active:text-brand-gold"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <!-- Mobile CTA -->
+  <div class="px-5 pb-10">
+    <a
+      href="#cta"
+      class="mobile-nav-link block bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-8 py-4 rounded-none text-center w-full"
+    >
+      Get Started
+    </a>
+  </div>
+</div>
+
+<script>
+  const openBtn = document.getElementById('nav-open') as HTMLButtonElement;
+  const closeBtn = document.getElementById('nav-close') as HTMLButtonElement;
+  const menu = document.getElementById('mobile-menu') as HTMLElement;
+  const mobileLinks = menu.querySelectorAll<HTMLElement>('.mobile-nav-link');
+
+  const focusableSelectors = 'a[href], button:not([disabled])';
+
+  function openMenu() {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    openBtn.setAttribute('aria-expanded', 'true');
+    closeBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
+    openBtn.setAttribute('aria-expanded', 'false');
+    openBtn.focus();
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Focus trap
+  menu.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(menu.querySelectorAll<HTMLElement>(focusableSelectors));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && !menu.classList.contains('hidden')) closeMenu();
+  });
+</script>

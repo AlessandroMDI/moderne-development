@@ -1,0 +1,24 @@
+---
+const items = [
+  'US Pilots Active — Austin TX & Canyon Lake',
+  'UK Partnership — Barratt Redrow',
+  'Build Partners: ICON · Instatiq · Printerra · Liberty3D',
+  'MDOS — Operating System for the AEC Industry',
+  'Design Once, Deploy Many',
+  'Patents Filed: 4 + 10 in Preparation',
+];
+
+const separator = '·';
+---
+
+<div class="bg-surface-dark overflow-hidden whitespace-nowrap border-t border-white/10">
+  <div class="flex animate-marquee">
+    {/* Duplicate the list twice so the loop is seamless */}
+    {[...items, ...items].map((item, i) => (
+      <span class="inline-flex items-center gap-5 px-5 py-2.5 font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold shrink-0">
+        <span class="text-brand-gold/40">{separator}</span>
+        {item}
+      </span>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,141 @@
+---
+---
+
+<!-- Modal overlay — hidden by default, toggled via JS -->
+<div
+  id="contact-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Contact form"
+  class="fixed inset-0 z-50 flex items-center justify-center px-5 hidden"
+>
+  <!-- Backdrop -->
+  <div id="contact-backdrop" class="absolute inset-0 bg-black/70"></div>
+
+  <!-- Panel -->
+  <div class="relative bg-brand-green border border-white/20 w-full max-w-[560px] p-8 md:p-10">
+
+    <!-- Close button -->
+    <button
+      id="contact-close"
+      aria-label="Close contact form"
+      class="absolute top-4 right-4 w-11 h-11 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 2L18 18M18 2L2 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      </svg>
+    </button>
+
+    <h2 class="font-display text-[28px] md:text-[36px] leading-none tracking-tight uppercase text-white mb-2">
+      Get in <span class="text-brand-gold">Touch</span>
+    </h2>
+    <p class="font-sans text-sm text-white/50 leading-relaxed mb-8">
+      Tell us a bit about yourself and we'll be in touch shortly.
+    </p>
+
+    <form
+      name="contact"
+      method="POST"
+      netlify
+      data-netlify="true"
+      class="flex flex-col gap-5"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+
+      <div class="flex flex-col gap-1">
+        <label for="cf-name" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">Name</label>
+        <input
+          id="cf-name"
+          type="text"
+          name="name"
+          required
+          placeholder="Your name"
+          class="bg-transparent border border-white/20 text-white font-sans text-sm px-4 h-12 placeholder:text-white/25 focus:outline-none focus:border-brand-gold transition-colors"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="cf-email" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">Email</label>
+        <input
+          id="cf-email"
+          type="email"
+          name="email"
+          required
+          placeholder="you@company.com"
+          class="bg-transparent border border-white/20 text-white font-sans text-sm px-4 h-12 placeholder:text-white/25 focus:outline-none focus:border-brand-gold transition-colors"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="cf-interest" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">I am a</label>
+        <select
+          id="cf-interest"
+          name="interest"
+          required
+          class="bg-brand-green border border-white/20 text-white font-sans text-sm px-4 h-12 appearance-none focus:outline-none focus:border-brand-gold transition-colors cursor-pointer"
+        >
+          <option value="" disabled selected class="text-white/25">Select one</option>
+          <option value="developer-builder">Developer / Builder</option>
+          <option value="investor-partner">Investor / Partner</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="cf-message" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">Message</label>
+        <textarea
+          id="cf-message"
+          name="message"
+          rows="4"
+          placeholder="Tell us about your project or interest"
+          class="bg-transparent border border-white/20 text-white font-sans text-sm px-4 py-3 placeholder:text-white/25 focus:outline-none focus:border-brand-gold transition-colors resize-none"
+        ></textarea>
+      </div>
+
+      <div class="btn-3d-wrapper w-full mt-2">
+        <div class="btn-3d-depth"></div>
+        <div class="btn-3d-left"></div>
+        <div class="btn-3d-bottom"></div>
+        <button
+          type="submit"
+          class="btn-3d-face bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-8 py-4 w-full block text-center"
+        >
+          Send Message
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('contact-modal');
+  const backdrop = document.getElementById('contact-backdrop');
+  const closeBtn = document.getElementById('contact-close');
+
+  function openModal() {
+    modal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function closeModal() {
+    modal?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Trigger from "Get in Touch" button(s)
+  document.querySelectorAll('[data-contact-trigger]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  backdrop?.addEventListener('click', closeModal);
+  closeBtn?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>

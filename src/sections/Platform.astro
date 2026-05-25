@@ -1,0 +1,88 @@
+---
+const capabilities = [
+  {
+    num: '01',
+    title: 'AI Land & Feasibility Screening',
+    body: 'MDOS scans parcels for zoning compliance, development potential, and project feasibility before a dollar is committed.',
+  },
+  {
+    num: '02',
+    title: '5D BIM & Cost Automation',
+    body: 'A site-adaptable design library auto-generates AEC-ready BIM files, cost estimates, and engineering specs via VERTIKAAL.',
+  },
+  {
+    num: '03',
+    title: 'Robotic Code Generation',
+    body: 'MDOS translates BIM directly into robotic print sequences for 3D concrete systems: ICON, Printerra, and Liberty3D. No manual re-authoring.',
+  },
+  {
+    num: '04',
+    title: 'Prefab & Modular Workflows',
+    body: 'Tunnel-form, SCIP panel, and modular construction sequences are generated from the same design input. One BIM, many build paths.',
+  },
+  {
+    num: '05',
+    title: 'Digital Twin Generation',
+    body: 'Every MDOS project produces a live digital twin for active monitoring, ongoing iteration, and redeployment across future projects.',
+  },
+  {
+    num: '06',
+    title: 'Design Once, Deploy Many',
+    body: 'Validated MDOS builds are redeployable across markets, geographies, and project types. The designs, workflows, and robotic code carry over.',
+  },
+];
+---
+
+<section id="platform" class="bg-brand-green scroll-mt-14 lg:scroll-mt-16 px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
+  <div class="max-w-[1280px] mx-auto">
+
+    <!-- Section header -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 mb-14 lg:mb-20">
+
+      <div>
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-3 mb-5">
+          <span class="block w-6 h-px bg-brand-gold"></span>
+          <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">MDOS</span>
+        </div>
+
+        <h2 class="font-display text-[36px] md:text-[44px] lg:text-[52px] leading-none tracking-tight uppercase text-white">
+          One System.<br />
+          <span class="text-brand-gold">Every Stage</span> of the Build.
+        </h2>
+      </div>
+
+      <div class="lg:pt-1">
+        <p class="font-sans text-base font-semibold tracking-wide uppercase text-white mb-4">Moderne Development Operating System</p>
+        <p class="font-sans text-base text-white/70 leading-relaxed text-left">
+          MDOS is MDI's proprietary platform connecting AI-driven site analysis, automated BIM, and robotic construction into a single pipeline. Not a tool you buy or license. It is the operating layer MDI deploys on every project, from land acquisition to final delivery.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Label -->
+    <div class="mb-10">
+      <h3 class="font-display text-[28px] md:text-[32px] uppercase tracking-tight text-white">Platform Capabilities</h3>
+    </div>
+
+    <!-- Capabilities: 3D bordered cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-visible pl-[6px] pb-[6px]">
+      {capabilities.map((cap) => (
+        <div class="card-3d-wrapper">
+          <div class="card-3d-depth"></div>
+          <div class="card-3d-left"></div>
+          <div class="card-3d-bottom"></div>
+          <div class="card-3d-face bg-brand-green border border-white/15 border-t-2 border-t-brand-gold p-6 lg:p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="font-display text-[18px] text-brand-gold leading-none shrink-0">{cap.num}</span>
+              <h3 class="font-sans text-sm font-semibold text-white leading-snug">{cap.title}</h3>
+            </div>
+            <p class="font-sans text-sm text-white/80 leading-relaxed">{cap.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

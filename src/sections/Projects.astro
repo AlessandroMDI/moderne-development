@@ -1,0 +1,149 @@
+---
+import { Image } from 'astro:assets';
+import commercialImg from '../assets/images/projects/commercial.jpg';
+import residentialImg from '../assets/images/projects/residential.jpg';
+import multiUnitImg from '../assets/images/projects/multi-unit.jpg';
+
+const categories = [
+  {
+    id: 'commercial',
+    label: 'Commercial',
+    title: 'Commercial',
+    img: commercialImg,
+    imgAlt: 'Commercial development project',
+    body: [
+      'We design and deliver commercial spaces built around how businesses actually operate — not how they operated a decade ago. Advanced robotics, 3D concrete printing, and digital construction methods let us build faster and with tighter structural tolerances than conventional site work allows.',
+      'Modern Methods of Construction (MMC) cut delays and reduce material waste without sacrificing performance. Commercial developments built through this process are more durable, easier to phase, and significantly cheaper to deliver at scale.',
+      "Office environments, mixed-use hubs, retail — the category doesn't change the approach. The process is the same. So are the results.",
+    ],
+  },
+  {
+    id: 'residential',
+    label: 'Residential',
+    title: 'Residential',
+    img: residentialImg,
+    imgAlt: 'Residential development project',
+    body: [
+      "We build homes using advanced robotics, automated building systems, and 3D concrete printing. The technology isn’t the point — the output is. Homes built through this process are more precise, take less time to complete, and perform better structurally than most site-built alternatives.",
+      "MMC reduces material waste and allows for tighter tolerances at every stage of construction. We design for durability from the start, not as an afterthought.",
+      "The people who will live in these homes aren’t thinking about the construction method. They shouldn’t have to. That’s what we handle.",
+    ],
+  },
+  {
+    id: 'multi-unit',
+    label: 'Multi-Unit',
+    title: 'Multi-Unit',
+    img: multiUnitImg,
+    imgAlt: 'Multi-unit development project',
+    body: [
+      'Multi-family housing puts everything under pressure — cost, schedule, structural performance, and density requirements. We address all of it through robotics, automated construction systems, and 3D concrete printing integrated directly into the build process.',
+      'Digital construction and Modern Methods of Construction (MMC) allow us to move faster without trading off structural quality. The result is multi-family buildings that perform well and cost less to deliver.',
+      "We're building communities people actually want to live in. The density gets handled. So does the durability.",
+    ],
+  },
+];
+---
+
+<section id="projects" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16 px-5 pt-16 pb-12 md:px-10 md:pt-20 md:pb-14 lg:px-20 lg:pt-28 lg:pb-20">
+  <div class="max-w-[1280px] mx-auto">
+
+    <!-- Section header -->
+    <div class="mb-10 lg:mb-14">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="block w-6 h-px bg-brand-gold"></span>
+        <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Projects</span>
+      </div>
+      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
+        Where We <span class="text-brand-gold">Build.</span>
+      </h2>
+      <p class="font-sans text-base leading-relaxed text-text-secondary mt-4 max-w-[600px]">
+        Actively delivering projects across the US and UK — validating the platform in real-world conditions.
+      </p>
+    </div>
+
+    <!-- Card grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-[3px] bg-text-divider" id="projects-grid">
+      {categories.map((cat) => (
+        <button
+          class="project-card relative overflow-hidden cursor-pointer group text-left bg-surface-cream focus:outline-none"
+          aria-expanded="false"
+          data-card={cat.id}
+        >
+          <div class="relative overflow-hidden">
+            <Image
+              src={cat.img}
+              alt={cat.imgAlt}
+              widths={[480, 720, 960]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              loading="lazy"
+              quality={85}
+              class="w-full aspect-[3/4] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+            <!-- Active indicator: gold top bar -->
+            <div class="project-card-indicator absolute top-0 left-0 right-0 h-[3px] bg-brand-gold opacity-0 transition-none"></div>
+            <!-- Label text -->
+            <div class="absolute bottom-0 left-0 p-5 lg:p-7">
+              <span class="block font-display text-[26px] lg:text-[30px] uppercase leading-none text-white">{cat.title}</span>
+            </div>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <!-- Content panels (full-width, below cards) -->
+    {categories.map((cat) => (
+      <div class="project-content hidden mt-[3px]" data-content={cat.id}>
+        <div class="bg-brand-green flex gap-8 lg:gap-12 px-8 py-10 lg:px-12 lg:py-12">
+          <div class="w-px bg-brand-gold flex-shrink-0 self-stretch"></div>
+          <div>
+            {cat.body.map((para) => (
+              <p class="font-sans text-base leading-relaxed text-white/80 mb-4 last:mb-0">{para}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</section>
+
+<script>
+  const grid = document.getElementById('projects-grid');
+  if (grid) {
+    let openId: string | null = null;
+
+    grid.addEventListener('click', (e) => {
+      const card = (e.target as Element).closest('[data-card]') as HTMLElement | null;
+      if (!card) return;
+
+      const id = card.dataset.card!;
+      const content = document.querySelector(`[data-content="${id}"]`) as HTMLElement | null;
+      const indicator = card.querySelector('.project-card-indicator') as HTMLElement | null;
+
+      if (openId && openId !== id) {
+        const prevContent = document.querySelector(`[data-content="${openId}"]`) as HTMLElement | null;
+        const prevCard = grid.querySelector(`[data-card="${openId}"]`) as HTMLElement | null;
+        const prevIndicator = prevCard?.querySelector('.project-card-indicator') as HTMLElement | null;
+        prevContent?.classList.add('hidden');
+        prevCard?.setAttribute('aria-expanded', 'false');
+        if (prevIndicator) prevIndicator.style.opacity = '0';
+      }
+
+      const isOpen = !content?.classList.contains('hidden');
+
+      if (isOpen) {
+        content?.classList.add('hidden');
+        card.setAttribute('aria-expanded', 'false');
+        if (indicator) indicator.style.opacity = '0';
+        openId = null;
+      } else {
+        content?.classList.remove('hidden');
+        card.setAttribute('aria-expanded', 'true');
+        if (indicator) indicator.style.opacity = '1';
+        openId = id;
+      }
+    });
+  }
+</script>

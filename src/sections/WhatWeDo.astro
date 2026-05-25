@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import teamImg from '../assets/images/team/full-team.jpg';
+import Ticker from '../components/Ticker.astro';
+
+const features = [
+  {
+    title: 'AI-Driven Land & Feasibility',
+    body: 'Automated screening of real estate opportunities, zoning constraints, and project viability before a dollar moves.',
+  },
+  {
+    title: 'Digital Twin & BIM Automation',
+    body: 'AEC-ready BIM files, cost estimation, engineering specs, and regulatory compliance — auto-generated.',
+  },
+  {
+    title: 'Developer-Led Execution',
+    body: 'We JV with builders early, validating designs and technology in the field. Not in a conference room.',
+  },
+];
+---
+
+<section id="what-we-do" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16">
+  <Ticker />
+
+  <div class="flex flex-col lg:flex-row">
+
+    <!-- Left: full-bleed team photo -->
+    <div class="lg:w-1/2 relative min-h-[320px] lg:min-h-[680px]">
+      <Image
+        src={teamImg}
+        alt="The Moderne Development team"
+        class="absolute inset-0 w-full h-full object-cover object-top"
+        loading="lazy"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+      />
+    </div>
+
+    <!-- Right: content -->
+    <div class="lg:w-1/2 px-5 py-12 md:px-10 md:py-16 lg:px-16 lg:py-20 flex flex-col justify-center">
+
+      <!-- Eyebrow -->
+      <div class="flex items-center gap-3 mb-5">
+        <span class="block w-6 h-px bg-brand-gold"></span>
+        <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">What We Do</span>
+      </div>
+
+      <h2 class="font-display text-[36px] md:text-[44px] lg:text-[52px] leading-none tracking-tight uppercase text-text-primary mb-6 lg:mb-8">
+        The Operating System<br />for Modern Construction.
+      </h2>
+
+      <p class="font-sans text-base leading-relaxed text-text-primary mb-10 max-w-[540px]">
+        MDI develops MDOS, a platform that connects AI-enabled robotics, 5D-BIM automation, proven building systems, and the people who actually build. We partner directly with developers and builders. Projects run faster and finish closer to plan.
+      </p>
+
+      <!-- Feature cards -->
+      <div class="flex flex-col gap-0 border-t border-text-divider">
+        {features.map(f => (
+          <div class="border-b border-text-divider py-5 pl-4 border-l-2 border-l-brand-gold ml-0 -ml-0">
+            <h3 class="font-sans text-sm font-semibold text-text-primary mb-1">{f.title}</h3>
+            <p class="font-sans text-sm text-text-secondary leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>

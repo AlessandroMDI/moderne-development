@@ -1,0 +1,43 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  fullWidthMobile?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  fullWidthMobile = false,
+  class: className = '',
+} = Astro.props;
+---
+
+{variant === 'primary' ? (
+  <div class:list={['btn-3d-wrapper', fullWidthMobile ? 'w-full sm:w-auto' : '', className]}>
+    <div class="btn-3d-depth"></div>
+    <div class="btn-3d-left"></div>
+    <div class="btn-3d-bottom"></div>
+    <a
+      href={href}
+      class:list={[
+        'btn-3d-face bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 block text-center',
+        fullWidthMobile ? 'w-full sm:w-auto' : '',
+      ]}
+    >
+      <slot />
+    </a>
+  </div>
+) : (
+  <a
+    href={href}
+    class:list={[
+      'inline-flex items-center justify-center border border-white text-white font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 bg-transparent hover:bg-white hover:text-text-primary transition-colors duration-200',
+      fullWidthMobile ? 'w-full sm:w-auto' : '',
+      className,
+    ]}
+  >
+    <slot />
+  </a>
+)}
