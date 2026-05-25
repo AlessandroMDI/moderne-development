@@ -94,8 +94,8 @@ const team = [
           <Image
             src={member.img}
             alt={member.name + ', ' + member.title}
-            widths={[200, 320, 480]}
-            sizes="(max-width: 768px) 40vw, 25vw"
+            widths={[320, 480, 640]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             loading="lazy"
             quality={80}
             class:list={['aspect-square w-full object-cover object-top mb-3', member.grayscale ? 'grayscale' : '']}

@@ -9,12 +9,7 @@ export default defineConfig({
   output: 'static',
   integrations: [icon()],
   adapter: netlify(),
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/sharp',
-    },
-  },
-  vite: {
+vite: {
     plugins: [tailwindcss()],
   },
 });
