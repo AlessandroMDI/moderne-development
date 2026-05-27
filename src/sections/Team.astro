@@ -81,47 +81,57 @@ const team = [
         <span class="block w-6 h-px bg-brand-gold"></span>
         <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Team</span>
       </div>
-      <div class="flex items-end justify-between gap-6">
-        <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
-          The People <span class="text-brand-gold">Behind MDI.</span>
-        </h2>
-        <a
-          href="/team"
-          class="shrink-0 inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
-        >
-          See Full Team
-        </a>
-      </div>
+      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary mb-6">
+        The People <span class="text-brand-gold">Behind MDI.</span>
+      </h2>
+      <a
+        href="/team"
+        class="inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
+      >
+        See Full Team
+      </a>
     </div>
 
-    <!-- Team grid (first 3 members only — see /team for full roster) -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 lg:gap-x-8 lg:gap-y-10">
+    <!-- Team rows (first 3 members only — see /team for full roster) -->
+    <div class="flex flex-col divide-y divide-brand-gold/20">
       {team.slice(0, 3).map((member) => (
-        <div class="flex flex-col">
+        <div class="flex flex-col sm:flex-row gap-6 lg:gap-10 py-10 first:pt-0 last:pb-0">
 
           <Image
             src={member.img}
             alt={member.name + ', ' + member.title}
             widths={[320, 480, 640]}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 240px, 300px"
             loading="lazy"
             quality={80}
-            class:list={['aspect-square w-full object-cover object-top mb-3', member.grayscale ? 'grayscale' : '']}
+            class:list={['w-full sm:w-[240px] lg:w-[300px] shrink-0 aspect-square object-cover object-top', member.grayscale ? 'grayscale' : '']}
           />
 
-          <!-- Name -->
-          <p class="font-sans text-sm lg:text-base font-semibold text-text-primary leading-snug">{member.name}</p>
+          <div class="flex flex-col justify-center">
+            <!-- Name -->
+            <p class="font-sans text-base lg:text-lg font-semibold text-text-primary leading-snug">{member.name}</p>
 
-          <!-- Title -->
-          <p class="font-sans text-[11px] text-text-secondary uppercase tracking-widest mt-1 mb-3">{member.title}</p>
+            <!-- Title -->
+            <p class="font-sans text-[11px] text-text-secondary uppercase tracking-widest mt-1 mb-4">{member.title}</p>
 
-          <!-- Bio -->
-          {member.bio && (
-            <p class="font-sans text-sm text-text-secondary leading-relaxed">{member.bio}</p>
-          )}
+            <!-- Bio -->
+            {member.bio && (
+              <p class="font-sans text-sm lg:text-base text-text-secondary leading-relaxed">{member.bio}</p>
+            )}
+          </div>
 
         </div>
       ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-10">
+      <a
+        href="/team"
+        class="inline-flex items-center justify-center border border-text-primary text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:bg-text-primary hover:text-surface-cream transition-all duration-200"
+      >
+        See Full Team
+      </a>
     </div>
 
   </div>

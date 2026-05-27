@@ -131,6 +131,26 @@ const categories = [
                   <h3 class="font-display text-[20px] md:text-[24px] lg:text-[28px] leading-none tracking-tight uppercase text-text-primary mb-5">
                     {project.name}
                   </h3>
+
+                  <!-- Image — mobile/tablet only (after subhead, before body) -->
+                  <div class="lg:hidden mb-6">
+                    {project.img ? (
+                      <Image
+                        src={project.img}
+                        alt={project.alt}
+                        widths={[375, 640, 960]}
+                        sizes="100vw"
+                        loading="lazy"
+                        quality={80}
+                        class="w-full aspect-[4/3] object-cover"
+                      />
+                    ) : (
+                      <div class="aspect-[4/3] bg-surface-dark flex items-center justify-center">
+                        <span class="font-sans text-xs text-text-secondary">Photography pending</span>
+                      </div>
+                    )}
+                  </div>
+
                   {project.body.map((para, i) => (
                     <p class={`font-sans text-base leading-relaxed text-text-primary${i < project.body.length - 1 ? ' mb-4' : ''}`}>
                       {para}
@@ -138,14 +158,14 @@ const categories = [
                   ))}
                 </div>
 
-                <!-- Image column -->
-                <div class="lg:w-5/12 shrink-0">
+                <!-- Image column — desktop only -->
+                <div class="hidden lg:block lg:w-5/12 shrink-0">
                   {project.img ? (
                     <Image
                       src={project.img}
                       alt={project.alt}
                       widths={[375, 640, 960]}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      sizes="50vw"
                       loading="lazy"
                       quality={80}
                       class="w-full aspect-[4/3] object-cover"

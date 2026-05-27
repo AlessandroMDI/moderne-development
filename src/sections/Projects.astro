@@ -55,20 +55,22 @@ const categories = [
         <span class="block w-6 h-px bg-brand-gold"></span>
         <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Projects</span>
       </div>
-      <div class="flex items-end justify-between gap-6">
-        <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
-          Projects Powered by <span class="text-brand-gold">MDI.</span>
-        </h2>
+      <div class="md:flex md:items-end md:justify-between md:gap-6">
+        <div>
+          <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
+            Projects Powered by <span class="text-brand-gold">MDI.</span>
+          </h2>
+          <p class="font-sans text-base leading-relaxed text-text-secondary mt-4 max-w-[600px]">
+            Actively delivering projects across the US and UK — validating the platform in real-world conditions.
+          </p>
+        </div>
         <a
           href="/projects"
-          class="shrink-0 inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
+          class="mt-6 md:mt-0 shrink-0 inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
         >
           See Our Projects
         </a>
       </div>
-      <p class="font-sans text-base leading-relaxed text-text-secondary mt-4 max-w-[600px]">
-        Actively delivering projects across the US and UK — validating the platform in real-world conditions.
-      </p>
     </div>
 
     <!-- Card grid -->
@@ -103,7 +105,7 @@ const categories = [
       ))}
     </div>
 
-    <!-- Content panels (full-width, below cards) -->
+    <!-- Content panels (full-width, below cards — desktop accordion only) -->
     {categories.map((cat) => (
       <div class="project-content hidden mt-[3px]" data-content={cat.id}>
         <div class="bg-brand-green flex gap-8 lg:gap-12 px-8 py-10 lg:px-12 lg:py-12">
@@ -120,8 +122,46 @@ const categories = [
   </div>
 </section>
 
+<!-- Mobile popup modal -->
+<div id="project-modal" class="fixed inset-0 z-50 hidden md:hidden" aria-modal="true" role="dialog">
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/60"></div>
+  <div class="absolute bottom-0 left-0 right-0 bg-brand-green max-h-[78vh] flex flex-col">
+    <div class="flex-shrink-0 flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/10">
+      <h3 id="modal-title" class="font-display text-[28px] uppercase text-white leading-none"></h3>
+      <button id="modal-close" aria-label="Close" class="text-white/50 hover:text-white transition-colors p-1 -mr-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="px-8 pt-8 pb-16 overflow-y-auto flex-1">
+      <div id="modal-body"></div>
+    </div>
+  </div>
+</div>
+
 <script>
   const grid = document.getElementById('projects-grid');
+  const modal = document.getElementById('project-modal') as HTMLElement | null;
+  const modalTitle = document.getElementById('modal-title') as HTMLElement | null;
+  const modalBody = document.getElementById('modal-body') as HTMLElement | null;
+  const modalClose = document.getElementById('modal-close');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+
+  function closeModal() {
+    modal?.classList.add('hidden');
+    document.body.style.overflow = '';
+    grid?.querySelectorAll('[data-card]').forEach(c => {
+      c.setAttribute('aria-expanded', 'false');
+      (c.querySelector('.project-card-indicator') as HTMLElement | null)?.style.setProperty('opacity', '0');
+    });
+  }
+
+  modalClose?.addEventListener('click', closeModal);
+  modalBackdrop?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
   if (grid) {
     let openId: string | null = null;
 
@@ -130,8 +170,26 @@ const categories = [
       if (!card) return;
 
       const id = card.dataset.card!;
-      const content = document.querySelector(`[data-content="${id}"]`) as HTMLElement | null;
       const indicator = card.querySelector('.project-card-indicator') as HTMLElement | null;
+
+      if (window.innerWidth < 768) {
+        // Mobile: show popup
+        const content = document.querySelector(`[data-content="${id}"]`) as HTMLElement | null;
+        const parasDiv = content?.querySelector('.bg-brand-green > div:last-child');
+        if (modalBody) modalBody.innerHTML = parasDiv?.innerHTML ?? '';
+        if (modalTitle) {
+          const labelEl = card.querySelector('.font-display');
+          modalTitle.textContent = labelEl?.textContent ?? '';
+        }
+        modal?.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (indicator) indicator.style.opacity = '1';
+        card.setAttribute('aria-expanded', 'true');
+        return;
+      }
+
+      // Desktop: accordion
+      const content = document.querySelector(`[data-content="${id}"]`) as HTMLElement | null;
 
       if (openId && openId !== id) {
         const prevContent = document.querySelector(`[data-content="${openId}"]`) as HTMLElement | null;
@@ -143,7 +201,6 @@ const categories = [
       }
 
       const isOpen = !content?.classList.contains('hidden');
-
       if (isOpen) {
         content?.classList.add('hidden');
         card.setAttribute('aria-expanded', 'false');

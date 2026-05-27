@@ -52,8 +52,8 @@ const audiences = [
       {audiences.map((a, i) => (
         <div class:list={[
           'py-10 lg:py-12 px-8',
-          i === 0 ? 'pl-0 md:pl-0' : '',
-          i === audiences.length - 1 ? 'pr-0 md:pr-0' : '',
+          i === 0 ? 'md:pl-0' : '',
+          i === audiences.length - 1 ? 'md:pr-0' : '',
           i < audiences.length - 1 ? 'border-b md:border-b-0 md:border-r border-text-divider' : '',
         ]}>
 
@@ -86,25 +86,25 @@ const audiences = [
     Radial gradient: strong in the center horizontally, fades to transparent
     before reaching the left/right edges — creating the "floating strip" look.
   */
-  .audience-strip::before,
-  .audience-strip::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 48px;
-    pointer-events: none;
-  }
+  @media (min-width: 768px) {
+    .audience-strip::before,
+    .audience-strip::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 48px;
+      pointer-events: none;
+    }
 
-  /* shadow bleeding upward from the top border */
-  .audience-strip::before {
-    bottom: 100%;
-    background: radial-gradient(ellipse 40% 100% at 50% 100%, rgba(0, 0, 0, 0.14) 0%, transparent 100%);
-  }
+    .audience-strip::before {
+      bottom: 100%;
+      background: radial-gradient(ellipse 40% 100% at 50% 100%, rgba(0, 0, 0, 0.14) 0%, transparent 100%);
+    }
 
-  /* shadow bleeding downward from the bottom border */
-  .audience-strip::after {
-    top: 100%;
-    background: radial-gradient(ellipse 40% 100% at 50% 0%, rgba(0, 0, 0, 0.14) 0%, transparent 100%);
+    .audience-strip::after {
+      top: 100%;
+      background: radial-gradient(ellipse 40% 100% at 50% 0%, rgba(0, 0, 0, 0.14) 0%, transparent 100%);
+    }
   }
 </style>
