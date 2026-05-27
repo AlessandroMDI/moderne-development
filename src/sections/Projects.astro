@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import commercialImg from '../assets/images/projects/commercial.jpg';
-import residentialImg from '../assets/images/projects/residential.jpg';
+import residentialImg from '../assets/images/projects/clarskville.jpg';
 import multiUnitImg from '../assets/images/projects/multi-unit.jpg';
 
 const categories = [
@@ -55,9 +55,17 @@ const categories = [
         <span class="block w-6 h-px bg-brand-gold"></span>
         <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Projects</span>
       </div>
-      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
-        Projects Powered by <span class="text-brand-gold">MDI.</span>
-      </h2>
+      <div class="flex items-end justify-between gap-6">
+        <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
+          Projects Powered by <span class="text-brand-gold">MDI.</span>
+        </h2>
+        <a
+          href="/projects"
+          class="shrink-0 inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
+        >
+          See Our Projects
+        </a>
+      </div>
       <p class="font-sans text-base leading-relaxed text-text-secondary mt-4 max-w-[600px]">
         Actively delivering projects across the US and UK — validating the platform in real-world conditions.
       </p>

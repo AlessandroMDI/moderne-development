@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ContactModal from '../components/ContactModal.astro';
+import { Image } from 'astro:assets';
+
+// ─── IMAGE IMPORTS ────────────────────────────────────────────────────────────
+// To add a new image: import it here, then reference it in the data below.
+import clarksvilleImg from '../assets/images/projects/clarskville.jpg';
+import multiUnitImg from '../assets/images/projects/multi-unit.jpg';
+
+// ─── PROJECT DATA ─────────────────────────────────────────────────────────────
+// To add a new category: add an object to this array.
+// To add a new project inside a category: add an object to that category's `projects` array.
+//
+// Each category:
+//   label    — displayed as the section heading
+//   projects — array of project objects (can be empty if content is pending)
+//
+// Each project:
+//   name     — displayed as the subheading
+//   img      — imported image variable from above (or null for placeholder)
+//   alt      — image alt text
+//   body     — array of paragraph strings
+
+const categories = [
+  {
+    label: 'Multi-Unit',
+    projects: [
+      {
+        name: 'Lighthouse Resort Orlando',
+        img: multiUnitImg,
+        alt: 'Lighthouse Resort Orlando — 600-unit condo-hotel development on Lake Cecile, Kissimmee, Florida',
+        body: [
+          '600 units. Eight buildings. Lighthouse Resort Orlando is a luxury condo-hotel development on the shores of Lake Cecile in Kissimmee, Florida — 3.5 miles from Walt Disney World on its primary access road.',
+          'General contractor Shawmut Design and Construction, an ENR Top 40 firm with $2.1 billion in annual revenue, is delivering the project using tunnel form concrete construction with 3D printing integration. The existing Berkley Orlando buildings on the same site are full concrete construction and require only cosmetic renovation.',
+          'The Berkley Orlando currently operates at 91% occupancy and holds the number one TripAdvisor ranking for the area. The expanded 600-unit development projects blended occupancy at 82% with an estimated per-unit NOI of $83,000 annually.',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Residential',
+    projects: [
+      {
+        name: 'Clarksville',
+        img: clarksvilleImg,
+        alt: 'Clarksville residential development — West Lynn and 14th Street, Austin, Texas',
+        body: [
+          'Four homes at West Lynn and 14th Street in Austin, Texas. The site sits in the Clarksville neighborhood on a half-acre parcel, surrounded by an existing mix of coffee shops and small offices being redeveloped on the same block.',
+          "Each home is built using ICON's Titan print system — the same 3D concrete printing technology behind the world's largest printed communities. Homes range from 2,200 to 3,500 square feet across four-bedroom and five-bedroom floor plans, with construction scheduled to begin in late 2026.",
+          'Projected at $1,350 to $1,400 per square foot, the pricing compares favorably to comparable West Lynn condos at $1,700 per square foot. Construction completion is targeted for summer 2027.',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Commercial',
+    projects: [
+      // TODO: client to provide
+      // {
+      //   name: 'Project Name',
+      //   img: null,
+      //   alt: '',
+      //   body: ['Paragraph one.', 'Paragraph two.'],
+      // },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Our Projects | Moderne Development Inc."
+  description="MDI projects across Commercial, Residential, and Multi-Unit categories — built with 3D concrete printing, robotics, and digital construction."
+>
+  <Navbar />
+
+  <!-- Page header -->
+  <section class="bg-surface-cream px-5 md:px-10 lg:px-20 pt-14 lg:pt-16 border-b border-text-divider">
+    <div class="max-w-[1280px] mx-auto pt-16 pb-14 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20">
+
+      <!-- Back nav -->
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 font-sans text-xs font-medium tracking-widest uppercase text-text-secondary hover:text-text-primary transition-colors duration-200 mb-8 lg:mb-10"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+      </a>
+
+      <h1 class="font-display text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-tight uppercase text-text-primary">
+        Our <span class="text-brand-gold">Projects</span>
+      </h1>
+
+    </div>
+  </section>
+
+  <!-- Project sections — rendered from data above -->
+  {categories.map((category) => (
+    <section class="bg-surface-cream px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28 border-b border-text-divider">
+      <div class="max-w-[1280px] mx-auto">
+
+        <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary mb-10 lg:mb-14">
+          {category.label}
+        </h2>
+
+        {category.projects.length === 0 ? (
+          <!-- Placeholder when no projects are defined yet -->
+          <div class="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-20">
+            <div class="lg:w-7/12">
+              <p class="font-sans text-base leading-relaxed text-text-secondary">
+                Project details coming soon.
+              </p>
+            </div>
+            <div class="lg:w-5/12 shrink-0">
+              <div class="aspect-[4/3] bg-surface-dark flex items-center justify-center">
+                <span class="font-sans text-xs text-text-secondary">Photography pending</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div class="flex flex-col gap-16 lg:gap-24">
+            {category.projects.map((project) => (
+              <div class="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-20">
+
+                <!-- Text column -->
+                <div class="lg:w-7/12">
+                  <h3 class="font-display text-[20px] md:text-[24px] lg:text-[28px] leading-none tracking-tight uppercase text-text-primary mb-5">
+                    {project.name}
+                  </h3>
+                  {project.body.map((para, i) => (
+                    <p class={`font-sans text-base leading-relaxed text-text-primary${i < project.body.length - 1 ? ' mb-4' : ''}`}>
+                      {para}
+                    </p>
+                  ))}
+                </div>
+
+                <!-- Image column -->
+                <div class="lg:w-5/12 shrink-0">
+                  {project.img ? (
+                    <Image
+                      src={project.img}
+                      alt={project.alt}
+                      widths={[375, 640, 960]}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      loading="lazy"
+                      quality={80}
+                      class="w-full aspect-[4/3] object-cover"
+                    />
+                  ) : (
+                    <div class="aspect-[4/3] bg-surface-dark flex items-center justify-center">
+                      <span class="font-sans text-xs text-text-secondary">Photography pending</span>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            ))}
+          </div>
+        )}
+
+      </div>
+    </section>
+  ))}
+
+  <Footer />
+  <ContactModal />
+
+</Layout>

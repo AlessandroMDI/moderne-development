@@ -81,14 +81,22 @@ const team = [
         <span class="block w-6 h-px bg-brand-gold"></span>
         <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Team</span>
       </div>
-      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
-        The People <span class="text-brand-gold">Behind MDI.</span>
-      </h2>
+      <div class="flex items-end justify-between gap-6">
+        <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
+          The People <span class="text-brand-gold">Behind MDI.</span>
+        </h2>
+        <a
+          href="/team"
+          class="shrink-0 inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
+        >
+          See Full Team
+        </a>
+      </div>
     </div>
 
-    <!-- Team grid -->
+    <!-- Team grid (first 3 members only — see /team for full roster) -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 lg:gap-x-8 lg:gap-y-10">
-      {team.map((member) => (
+      {team.slice(0, 3).map((member) => (
         <div class="flex flex-col">
 
           <Image
