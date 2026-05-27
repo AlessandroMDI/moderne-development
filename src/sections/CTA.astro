@@ -41,24 +41,19 @@ import Button from '../components/Button.astro';
 
       <!-- CTA buttons -->
       <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-        <div class="btn-3d-wrapper w-full sm:w-auto">
-          <div class="btn-3d-depth"></div>
-          <div class="btn-3d-left"></div>
-          <div class="btn-3d-bottom"></div>
-          <button
-            data-contact-trigger
-            class="btn-3d-face bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 w-full sm:w-auto block text-center"
-          >
-            Get in Touch
-          </button>
-        </div>
-        <Button href="#platform" variant="secondary" fullWidthMobile={true}>Learn About MDOS &rarr;</Button>
+        <button
+          data-contact-trigger
+          class="inline-flex items-center justify-center border border-white text-white font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 bg-transparent hover:bg-white hover:text-text-primary transition-colors duration-200 w-full sm:w-auto"
+        >
+          Get in Touch
+        </button>
+        <Button href="#platform" variant="secondary" fullWidthMobile={true}>Request Access to Alpha &rarr;</Button>
       </div>
 
       <!-- Footer -->
       <div class="mt-16 pt-8 border-t border-white/10 w-full">
         <p class="font-sans text-[11px] text-white/30 tracking-wide">
-          &copy; {new Date().getFullYear()} MDI &mdash; Moderne Development, Inc.
+          &copy; {new Date().getFullYear()} MDI
         </p>
       </div>
 

@@ -2,13 +2,6 @@
 import { Image } from 'astro:assets';
 import heroImg from '../assets/images/hero/hero.jpg';
 import Button from '../components/Button.astro';
-
-const stats = [
-  { value: '20,000+', label: 'Homes in Pipeline' },
-  { value: '$4B',     label: 'Projected Transaction Value' },
-  { value: '5 Days',  label: 'Build Time with MDOS' },
-  { value: '4',       label: 'Patents Filed' },
-];
 ---
 
 <section id="hero" class="relative min-h-screen flex flex-col overflow-hidden">
@@ -16,7 +9,7 @@ const stats = [
   <!-- Background image -->
   <Image
     src={heroImg}
-    alt="Moderne Development team on a construction site"
+    alt="MDI team on a construction site"
     class="absolute inset-0 w-full h-full object-cover object-center"
     loading="eager"
     fetchpriority="high"
@@ -30,7 +23,7 @@ const stats = [
 
   <!-- Content -->
   <div class="relative z-10 flex-1 flex flex-col justify-end px-5 md:px-10 lg:px-20 pb-16 md:pb-20 lg:pb-28 pt-28 lg:pt-36">
-    <div class="max-w-[1280px] mx-auto w-full flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12 lg:gap-20">
+    <div class="max-w-[1280px] mx-auto w-full">
 
       <!-- Headline + CTA -->
       <div class="lg:max-w-[640px]">
@@ -45,20 +38,6 @@ const stats = [
         </p>
 
         <Button href="#what-we-do" fullWidthMobile={true}>Learn More</Button>
-      </div>
-
-      <!-- Stats -->
-      <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-6 lg:gap-y-8 lg:min-w-[200px] bg-black/30 backdrop-blur-md p-6 lg:p-8">
-        {stats.map((stat, i) => (
-          <div class:list={['', i < stats.length - 1 ? 'lg:border-b lg:border-white/50 lg:pb-8' : '']}>
-            <div class="font-display text-[36px] md:text-[40px] lg:text-[44px] text-brand-gold leading-none tracking-tight">
-              {stat.value}
-            </div>
-            <div class="font-sans text-xs text-white/90 uppercase tracking-widest mt-1">
-              {stat.label}
-            </div>
-          </div>
-        ))}
       </div>
 
     </div>

@@ -23,6 +23,7 @@ const categories = [
     title: 'Residential',
     img: residentialImg,
     imgAlt: 'Residential development project',
+    imgPosition: '45% center',
     body: [
       "We build homes using advanced robotics, automated building systems, and 3D concrete printing. The technology isn’t the point — the output is. Homes built through this process are more precise, take less time to complete, and perform better structurally than most site-built alternatives.",
       "MMC reduces material waste and allows for tighter tolerances at every stage of construction. We design for durability from the start, not as an afterthought.",
@@ -35,6 +36,7 @@ const categories = [
     title: 'Multi-Unit',
     img: multiUnitImg,
     imgAlt: 'Multi-unit development project',
+    imgPosition: '42% center',
     body: [
       'Multi-family housing puts everything under pressure — cost, schedule, structural performance, and density requirements. We address all of it through robotics, automated construction systems, and 3D concrete printing integrated directly into the build process.',
       'Digital construction and Modern Methods of Construction (MMC) allow us to move faster without trading off structural quality. The result is multi-family buildings that perform well and cost less to deliver.',
@@ -54,7 +56,7 @@ const categories = [
         <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Projects</span>
       </div>
       <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
-        Where We <span class="text-brand-gold">Build.</span>
+        Projects Powered by <span class="text-brand-gold">MDI.</span>
       </h2>
       <p class="font-sans text-base leading-relaxed text-text-secondary mt-4 max-w-[600px]">
         Actively delivering projects across the US and UK — validating the platform in real-world conditions.
@@ -78,9 +80,10 @@ const categories = [
               loading="lazy"
               quality={80}
               class="w-full aspect-[3/4] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              style={cat.imgPosition ? `object-position: ${cat.imgPosition}` : undefined}
             />
             <!-- Gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/100 via-black/40 via-[15%] to-transparent"></div>
             <!-- Active indicator: gold top bar -->
             <div class="project-card-indicator absolute top-0 left-0 right-0 h-[3px] bg-brand-gold opacity-0 transition-none"></div>
             <!-- Label text -->
