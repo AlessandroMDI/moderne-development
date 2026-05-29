@@ -243,27 +243,6 @@ The `<button data-contact-trigger>` elements have no event listener in their res
 
 **Fix:** Wire the `data-contact-trigger` attribute to open the contact modal. If the contact modal is in a separate component, ensure the event is dispatched globally and caught by the modal's script.
 
----
-
-### 3.7 Ticker and marquees have no pause/stop control
-**File:** `src/components/Ticker.astro` line 13 (`animation: marquee 35s linear infinite`); `src/pages/platform.astro` (`.ticker-track`, `animation: platTicker 30s linear infinite`)
-**Criterion:** WCAG 2.2.2 Pause, Stop, Hide — **Level AA — FAIL**
-
-Both marquee animations start automatically and run indefinitely with no user control to pause or stop them. WCAG 2.2.2 requires that auto-moving content lasting more than 5 seconds has a pause/stop mechanism.
-
-**Fix:** Add a pause button adjacent to each ticker (can be visually minimal — an icon button). On click, apply `animation-play-state: paused` to the track. Alternatively, add a CSS rule that stops the animation for users with `prefers-reduced-motion: reduce`.
-
----
-
-### 3.8 CTA "Request Access" uses `href="#"`
-**File:** `src/sections/CTA.astro` line 62
-**Criterion:** WCAG 2.4.4 Link Purpose — **Level AA — FAIL**
-
-`href="#"` is a non-functional link that scrolls to the top of the page. Screen reader users following this link receive no destination feedback. If this is meant to trigger a JS action, it must be a `<button>`, not an `<a>`.
-
-**Fix:** If this triggers a modal or action, change to `<button type="button">`. If it links to a real destination, replace `#` with the real URL.
-
----
 
 ## 4. Images & Non-text Content
 
