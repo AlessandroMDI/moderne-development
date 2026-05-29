@@ -1,40 +1,128 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
 import ContactModal from '../components/ContactModal.astro';
+import { Image } from 'astro:assets';
+import clarksville from '../assets/images/projects/clarskville.jpg';
+import module01 from '../assets/images/modules/module-01.jpg';
+import module02 from '../assets/images/modules/module-02.jpg';
+import module03 from '../assets/images/modules/module-03.jpg';
+import module04 from '../assets/images/modules/module-04.jpg';
+import module05 from '../assets/images/modules/module-05.jpg';
 
-const capabilities = [
+const modules = [
   {
-    num: '01',
-    title: 'AI Land & Feasibility Screening',
-    body: 'MDOS scans parcels for zoning compliance, development potential, and project feasibility before a dollar is committed.',
+    id: 'm1',
+    label: '01 — Land & Feasibility',
+    heading: 'AI Land & Feasibility Screening',
+    sub: "Before a dollar is committed, MDOS evaluates parcels against zoning requirements, development potential, regulatory constraints, and financial viability — automatically. What used to take weeks of manual due diligence is compressed into a structured, repeatable screening process backed by MDI's proprietary methodology.",
+    specs: [
+      { title: 'Land Evaluation Reports', desc: 'Site-specific analysis covering zoning compliance, setbacks, density allowances, and development potential.' },
+      { title: 'Financial Feasibility Assessment', desc: "Pro-forma modeling, cost-to-build estimates, and project viability scoring against MDI's benchmarks." },
+      { title: 'Regulatory & Compliance Mapping', desc: 'Permitting pathway analysis, building code compatibility, and engineering certification requirements for robotic construction methods.' },
+    ],
+    img: module01,
+    imgAlt: 'Aerial parcel map — AI land and feasibility screening',
   },
   {
-    num: '02',
-    title: '5D BIM & Cost Automation',
-    body: 'A site-adaptable design library auto-generates AEC-ready BIM files, cost estimates, and engineering specs via VERTIKAAL.',
+    id: 'm2',
+    label: '02 — BIM Automation',
+    heading: '5D BIM & Cost Automation',
+    sub: "MDOS generates full AEC-ready BIM packages from a library of site-adaptable designs. Using MDI's VERTIKAAL integration, every project produces 5D Building Information Models — geometry, structure, MEP coordination, cost estimation, and engineering specification — in one digital package, without manual re-authoring.",
+    specs: [
+      { title: '5D BIM Files (VERTIKAAL)', desc: 'CAD drawings, architectural packages, structural models, and MEP coordination — all generated from a single design input.' },
+      { title: 'Integrated Cost Estimation', desc: 'Live cost estimates and budget tracking embedded directly in the BIM model — not in a separate spreadsheet.' },
+      { title: 'Engineering & Structural Packages', desc: 'Material specifications, structural calculations, and engineering documentation prepared for permit submission.' },
+    ],
+    img: module02,
+    imgAlt: 'BIM model on monitor — 5D BIM and cost automation',
   },
   {
-    num: '03',
-    title: 'Robotic Code Generation',
-    body: 'MDOS translates BIM directly into robotic print sequences for 3D concrete systems: ICON, Printerra, and Liberty3D. No manual re-authoring.',
+    id: 'm3',
+    label: '03 — Robotic Code',
+    heading: 'Robotic Code Generation',
+    sub: "MDOS translates BIM directly into robotic print sequences — no manual re-authoring, no translation layer. Wall assembly systems are specifically engineered for 3D concrete printing (3DCP), robotic assembly, and MDI's proprietary RMMC wall system. Technology-agnostic: ICON, Printerra, Liberty3D, and RIC Robotics from the same BIM input.",
+    specs: [
+      { title: 'Multi-Robot Code Output', desc: 'Robotic build instructions generated for ICON, Printerra, Liberty3D, and RIC Robotics from the same BIM input.' },
+      { title: 'RMMC Wall System Integration', desc: "MDI's Robotic Modular Mass Construction wall assembly engineered specifically for automated deployment." },
+      { title: 'BIM-to-Robot Pipeline', desc: 'Direct translation from design model to robotic construction sequence — eliminating manual conversion errors.' },
+    ],
+    img: module03,
+    imgAlt: 'Robotic arm printing concrete — robotic code generation',
   },
   {
-    num: '04',
-    title: 'Prefab & Modular Workflows',
-    body: 'Tunnel-form, SCIP panel, and modular construction sequences are generated from the same design input. One BIM, many build paths.',
+    id: 'm4',
+    label: '04 — Prefab Workflows',
+    heading: 'Prefab & Modular Workflows',
+    sub: 'The same BIM model that drives 3D printing also generates tunnel-form, SCIP panel, and modular construction sequences. One design input, many build paths — allowing projects to use the optimal construction method for their site, budget, and delivery requirements without redesigning from scratch.',
+    specs: [
+      { title: 'Tunnel-Form Construction Sequences', desc: 'Automated workflow generation for in-situ concrete forming — high-speed, high-volume residential delivery.' },
+      { title: 'SCIP Panel Systems', desc: 'Structural Concrete Insulated Panel workflows for energy-efficient, fast-erect building envelopes.' },
+      { title: 'Modular Assembly Coordination', desc: 'Off-site fabrication scheduling, logistics, and on-site assembly sequencing from the same design model.' },
+    ],
+    img: module04,
+    imgAlt: 'Modular units at staging yard — prefab and modular workflows',
   },
   {
-    num: '05',
-    title: 'Digital Twin Generation',
-    body: 'Every MDOS project produces a live digital twin for active monitoring, ongoing iteration, and redeployment across future projects.',
+    id: 'm5',
+    label: '05 — Digital Twin',
+    heading: 'Digital Twin Generation',
+    sub: 'Every MDOS project produces a live digital twin — a continuously updated model of the physical build. Not static documentation: an active monitoring layer capturing construction progress, QA data, and as-built conditions for iteration, asset management, and redeployment on future projects.',
+    specs: [
+      { title: 'Live Project Monitoring', desc: 'Real-time construction progress tracking against the BIM model — deviations flagged automatically.' },
+      { title: 'Quality Assurance & Documentation', desc: 'Digital QA checklists and subcontractor coordination frameworks embedded in the project twin.' },
+      { title: 'Redeployment Data Layer', desc: 'As-built data feeds back into the MDOS design library — each project makes the next one faster and cheaper.' },
+    ],
+    img: module05,
+    imgAlt: 'Digital twin building wireframe — live project monitoring',
   },
   {
-    num: '06',
-    title: 'Design Once, Deploy Many',
-    body: 'Validated MDOS builds are redeployable across markets, geographies, and project types. The designs, workflows, and robotic code carry over.',
+    id: 'm6',
+    label: '06 — Deploy & Scale',
+    heading: 'Design Once, Deploy Many',
+    sub: 'Validated MDOS builds are fully redeployable. Once a design, workflow, and robotic sequence has been proven on a live project, it becomes a reusable asset in the platform library — deployable across markets, geographies, and project types. The designs carry over. The BIM carries over. The robotic code carries over.',
+    specs: [
+      { title: 'Cross-Market Replication', desc: 'Proven builds from the US redeployed in the UK and MENA — same platform, adapted for local conditions.' },
+      { title: 'Growing Design Library', desc: 'Every completed project adds validated designs, BIM templates, and robotic sequences to the shared platform library.' },
+      { title: 'Compounding Cost Reduction', desc: 'Each redeployment is faster and cheaper than the last — the platform learns from every project it runs.' },
+    ],
+    img: 'https://modernedevelopment.com/wp-content/uploads/2025/08/03-right_tides_hero-01.jpg',
+    imgAlt: 'Scaled deployment',
   },
+];
+
+const pipelineSteps = [
+  { num: '01', title: 'Land Screening', desc: 'AI evaluates parcels against zoning, density, feasibility, and project goals' },
+  { num: '02', title: 'BIM Generation', desc: 'Site-adaptable designs auto-generate full 5D BIM packages via VERTIKAAL' },
+  { num: '03', title: 'Robotic Code', desc: 'BIM translates directly to robotic print and assembly — no manual conversion' },
+  { num: '04', title: 'Build Execution', desc: 'Certified partners execute on-site with MDOS as the coordination layer' },
+  { num: '05', title: 'Digital Twin Live', desc: 'A live digital twin monitors progress and captures as-built data' },
+  { num: '06', title: 'Replicate & Scale', desc: 'Validated builds become reusable platform assets across markets' },
+];
+
+const ipCards = [
+  { num: 'IP — 01', title: 'BIM-to-Robotic Translation', desc: 'Proprietary methodology for direct conversion of 5D BIM data into robotic construction sequences — eliminating the manual layer competitors depend on.' },
+  { num: 'IP — 02', title: 'RMMC Wall System', desc: "MDI's Robotic Modular Mass Construction wall assembly — engineered for automated deployment, integrated into the MDOS design library." },
+  { num: 'IP — 03', title: 'Digital Twin & Redeployment', desc: 'The system by which as-built project data feeds back into the MDOS design library — making each subsequent project faster and cheaper.' },
+  { num: 'IP — 04', title: 'Site-Adaptive Design Library', desc: 'Building designs specifically engineered for robotic construction — adaptable to site constraints while maintaining full MDOS pipeline compatibility.' },
+];
+
+const alphaItems = [
+  { num: '01', title: 'Priority platform access at Beta Launch', desc: 'No onboarding fee. Reduced subscription rate for 12 months. Priority access to new modules.' },
+  { num: '02', title: 'JV co-development on active projects', desc: "MDI provides Alpha Deliverables — BIM packages, robotic designs, feasibility analysis, and technical guidance — as a JV co-developer." },
+  { num: '03', title: 'Gross Profit sharing in lieu of platform fees', desc: 'Alpha Partners share project Gross Profit with MDI. No SaaS subscription charges during the Alpha Program.' },
+  { num: '04', title: "Direct access to MDI's technical team", desc: "Dedicated personnel on each JV project. Direct engagement with MDI's design and construction teams throughout." },
+];
+
+const tickerItems = [
+  '3D Concrete Printing',
+  'Prefabrication & Tunnel-Form',
+  'Structural Concrete Insulated Panels (SCIP)',
+  '5D BIM Automation via VERTIKAAL',
+  'Robotic Partners: ICON · Printerra · Liberty3D · RIC Robotics',
+  'Digital Twin Generation',
+  'AI Land & Feasibility Screening',
+  'RMMC Wall System',
 ];
 ---
 
@@ -42,122 +130,1058 @@ const capabilities = [
   title="MDOS — MDI Platform | Moderne Development"
   description="MDOS is MDI's proprietary operating platform — connecting AI-driven site analysis, automated BIM, and robotic construction into a single end-to-end pipeline."
 >
-  <Navbar />
 
-  <!-- Page Header -->
-  <section class="bg-surface-cream px-5 md:px-10 lg:px-20 pt-14 lg:pt-16">
-    <div class="max-w-[1280px] mx-auto pt-16 pb-14 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20">
+  <!-- Scroll progress bar -->
+  <div id="prog" aria-hidden="true"></div>
 
-      <!-- Back nav -->
-      <a
-        href="/"
-        class="inline-flex items-center gap-2 font-sans text-xs font-medium tracking-widest uppercase text-text-secondary hover:text-text-primary transition-colors duration-200 mb-8 lg:mb-10"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Home
-      </a>
+  <Navbar variant="light" />
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-[auto_1fr] gap-12 lg:gap-x-20 lg:gap-y-10">
-
-        <h1 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-tight tracking-tight uppercase text-text-primary lg:col-start-1 lg:row-start-1 lg:whitespace-nowrap">
-          The <span class="text-brand-green">Operating Layer</span> Every Project Runs On
-        </h1>
-
-        <div class="lg:col-start-1 lg:row-start-2">
-          <p class="font-sans text-base text-text-primary leading-relaxed mb-6">
-            MDOS is not a tool MDI sells or licenses separately. It is the platform MDI is building and deploying on every project — the operating layer that connects land to delivery.
-          </p>
-          <p class="font-sans text-base text-text-primary leading-relaxed">
-            Only developers can drive construction innovation at this level, because only developers control the full lifecycle. That is the differentiating argument — and MDOS is how MDI acts on it.
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-6 lg:col-start-2 lg:row-start-1 lg:row-span-2">
-
-          <div class="border-t border-text-divider pt-6">
-            <p class="font-sans text-xs font-medium tracking-widest uppercase text-text-secondary mb-2">Construction Methods</p>
-            <ul class="font-sans text-sm text-text-primary leading-relaxed space-y-1">
-              <li>3D Concrete Printing (3DCP)</li>
-              <li>Prefabrication and tunnel-form construction</li>
-              <li>Structural Concrete Insulated Panels (SCIP)</li>
-              <li>Robotic parking infrastructure</li>
-              <li>Fibre cement systems</li>
-              <li>Modular building systems</li>
-            </ul>
-          </div>
-
-          <div class="border-t border-text-divider pt-6">
-            <p class="font-sans text-xs font-medium tracking-widest uppercase text-text-secondary mb-2">Robotics Partners</p>
-            <p class="font-sans text-sm text-text-primary leading-relaxed">
-              MDOS is technology-agnostic. It generates robotic code for ICON, Printerra, Liberty3D, and RIC Robotics — whichever system best fits the project.
-            </p>
-          </div>
-
-          <div class="border-t border-text-divider pt-6">
-            <p class="font-sans text-xs font-medium tracking-widest uppercase text-text-secondary mb-2">Defensible IP</p>
-            <p class="font-sans text-sm text-text-primary leading-relaxed">
-              Four utility patents filed. Ten in preparation. U.S. and international coverage.
-            </p>
-          </div>
-
-        </div>
-
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section id="hero" class="plat-hero">
+    <div class="hero-gradient"></div>
+    <div class="hero-dot-grid"></div>
+    <div class="hero-content">
+      <div class="hero-chip">
+        <span class="chip-dot"></span>
+        MDOS Platform — Alpha Program Active
       </div>
-
+      <h1 class="hero-h1">
+        <span class="ln a1">The Operating System</span>
+        <span class="ln a2">for Modern Construction.</span>
+      </h1>
+      <p class="hero-sub">
+        MDOS connects AI-enabled land screening, 5D BIM automation, robotic construction workflows, and digital twin generation into one end-to-end stack — the platform every MDI project runs on.
+      </p>
+      <div class="hero-btns">
+        <button data-contact-trigger class="plat-btn-p">Join the Alpha Program</button>
+        <button id="explore-btn" class="plat-btn-s">Explore Capabilities →</button>
+      </div>
+      <div class="hero-proof">
+        <div class="hp"><div class="hp-v">4 Filed</div><div class="hp-k">Utility Patents</div></div>
+        <div class="hp"><div class="hp-v">6</div><div class="hp-k">Platform Modules</div></div>
+        <div class="hp"><div class="hp-v">Alpha</div><div class="hp-k">Program Active</div></div>
+        <div class="hp"><div class="hp-v">US · UK · MENA</div><div class="hp-k">Active Markets</div></div>
+      </div>
+    </div>
+    <div class="ticker">
+      <div class="ticker-track">
+        {[...tickerItems, ...tickerItems].map((item) => (
+          <>
+            <span class="ti">{item}</span>
+            <span class="ts">◆</span>
+          </>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- Platform Capabilities -->
-  <section class="bg-brand-green px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
-    <div class="max-w-[1280px] mx-auto">
-
-      <!-- Section label -->
-      <div class="mb-10">
-        <h2 class="font-display text-[28px] md:text-[32px] uppercase tracking-tight text-white">Platform Capabilities</h2>
+  <!-- ── WHAT IS MDOS ──────────────────────────────────────── -->
+  <section id="what" class="plat-bg2">
+    <div class="si">
+      <div class="what-g">
+        <div class="what-imgbox anim">
+          <Image src={clarksville} alt="Clarksville project — Active Alpha" loading="lazy" />
+          <div class="what-badge"><span class="bp"></span>Austin, TX — Active Alpha Project</div>
+        </div>
+        <div>
+          <p class="plat-lbl anim">What is MDOS</p>
+          <h2 class="plat-sh anim">Not a tool. An operating layer.</h2>
+          <p class="plat-sp anim">MDOS — the Moderne Development Operating System — is MDI's proprietary SaaS-based platform connecting every phase of a construction project. AI land screening, automated BIM, robotic workflows, and live digital twin monitoring — all in one connected stack. Every MDI project runs on MDOS. Every project makes it better.</p>
+          <div class="callouts">
+            <div class="callout anim">
+              <div class="ct">Developer-native by design</div>
+              <div class="cd">Only a developer controls the full project lifecycle. MDOS is built from that vantage point — validating in real conditions, not in isolation.</div>
+            </div>
+            <div class="callout anim">
+              <div class="ct">Technology-agnostic</div>
+              <div class="cd">MDOS generates robotic code for ICON, Printerra, Liberty3D, and RIC Robotics — whichever system best fits the project.</div>
+            </div>
+            <div class="callout anim">
+              <div class="ct">Protected at every layer</div>
+              <div class="cd">Four utility patents filed. Ten in preparation. US and international coverage across the full stack.</div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Capabilities grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-visible pl-[6px] pb-[6px]">
-        {capabilities.map((cap) => (
-          <div class="card-3d-wrapper">
-            <div class="card-3d-depth"></div>
-            <div class="card-3d-left"></div>
-            <div class="card-3d-bottom"></div>
-            <div class="card-3d-face bg-brand-green border border-white/15 border-t-2 border-t-brand-gold p-6 lg:p-8">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="font-display text-[18px] text-brand-gold leading-none shrink-0">{cap.num}</span>
-                <h3 class="font-sans text-sm font-semibold text-white leading-snug">{cap.title}</h3>
+  <!-- ── MODULES ───────────────────────────────────────────── -->
+  <section id="modules" class="plat-bg1">
+    <div class="si">
+      <p class="plat-lbl anim">Platform Capabilities</p>
+      <h2 class="plat-sh anim">Six modules. One connected stack.</h2>
+      <p class="plat-sp anim" style="margin-bottom:40px">Each module addresses a specific phase of the construction lifecycle, connected into a single uninterrupted workflow from opportunity to delivery.</p>
+      <div class="tab-group">
+        <div class="tab-nav" role="tablist">
+          {modules.map((m, i) => (
+            <button
+              class={`tab-btn${i === 0 ? ' active' : ''}`}
+              data-tab={m.id}
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-controls={m.id}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+        {modules.map((m, i) => (
+          <div class={`tab-panel${i === 0 ? ' active' : ''}`} id={m.id} role="tabpanel">
+            <div>
+              <div class="module-h">{m.heading}</div>
+              <p class="module-sub">{m.sub}</p>
+              <div class="specs">
+                {m.specs.map(spec => (
+                  <div class="spec">
+                    <div class="spec-dot"></div>
+                    <div><b>{spec.title}</b>{spec.desc}</div>
+                  </div>
+                ))}
               </div>
-              <p class="font-sans text-sm text-white/80 leading-relaxed">{cap.body}</p>
+            </div>
+            <div class="module-img">
+              <img src={typeof m.img === 'string' ? m.img : m.img.src} alt={m.imgAlt} loading="lazy" />
+              <div class="module-label">Module {String(i + 1).padStart(2, '0')}</div>
             </div>
           </div>
         ))}
       </div>
-
     </div>
   </section>
 
-  <!-- CTA strip -->
-  <section class="bg-brand-green px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
-    <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
-
-      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[44px] leading-tight tracking-tight uppercase text-white">
-        See <span class="text-brand-gold">MDOS</span> in Action
-      </h2>
-
-      <button
-        data-contact-trigger
-        class="inline-flex items-center justify-center border border-white text-white font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 bg-transparent hover:bg-white hover:text-text-primary transition-colors duration-200 w-full sm:w-auto shrink-0"
-      >
-        Work With Us
-      </button>
-
+  <!-- ── PIPELINE ──────────────────────────────────────────── -->
+  <section id="pipeline" class="plat-bg2">
+    <div class="si">
+      <div class="pipe-head">
+        <div>
+          <p class="plat-lbl anim">End-to-End Workflow</p>
+          <h2 class="plat-sh anim">From parcel to completed build.</h2>
+        </div>
+        <p class="plat-sp anim">Six connected stages. No gaps, no handoffs, no re-authoring between systems. One input, one pipeline, one output.</p>
+      </div>
+      <div class="pipe-steps">
+        {pipelineSteps.map(step => (
+          <div class="pipe-step anim">
+            <div class="pipe-num">{step.num}</div>
+            <div class="pipe-t">{step.title}</div>
+            <div class="pipe-d">{step.desc}</div>
+            <div class="pipe-bar"></div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
-  <Footer />
+  <!-- ── IP ────────────────────────────────────────────────── -->
+  <section id="ip" class="plat-bg1">
+    <div class="si">
+      <p class="plat-lbl anim">Defensible IP</p>
+      <h2 class="plat-sh anim">Built with protection at every layer.</h2>
+      <p class="plat-sp anim">MDOS is not just workflow — it's proprietary intellectual property with four utility patents filed and ten additional filings in preparation across US and international jurisdictions.</p>
+      <div class="ip-grid">
+        {ipCards.map(card => (
+          <div class="ip-card anim">
+            <div class="ip-num">{card.num}</div>
+            <h3>{card.title}</h3>
+            <p>{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ALPHA JV ───────────────────────────────────────────── -->
+  <section id="alpha" class="plat-forest">
+    <div class="si">
+      <div class="alpha-g">
+        <div>
+          <p class="plat-lbl alpha-lbl anim">Alpha JV Program</p>
+          <h2 class="plat-sh alpha-sh anim">Build with us before launch.</h2>
+          <p class="plat-sp alpha-sp anim">MDOS is in pre-commercial Alpha. We're co-developing real projects with early-adopter builders and developers — validating the platform live, delivering real returns, and locking in preferred commercial terms.</p>
+          <div class="alpha-list">
+            {alphaItems.map(item => (
+              <div class="alpha-li anim">
+                <span class="ali-n">{item.num}</span>
+                <div><b>{item.title}</b>{item.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="alpha-boxes">
+          <div class="abox anim">
+            <div class="abox-lbl">Status</div>
+            <div class="abox-v">Alpha — Active</div>
+            <div class="abox-d">Accepting qualified partners. US, UK, and MENA markets.</div>
+          </div>
+          <div class="abox anim">
+            <div class="abox-lbl">Alpha Deliverables</div>
+            <div class="abox-v">Full Stack</div>
+            <div class="abox-d">Digital workflows · BIM automation · Robotic designs · Site feasibility · Regulatory frameworks · Technical support</div>
+          </div>
+          <div class="abox anim">
+            <div class="abox-lbl">At Beta Launch</div>
+            <div class="abox-v">Preferred Terms</div>
+            <div class="abox-d">No onboarding fee · 12-month reduced rate · Priority feature access</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section id="cta" class="plat-bg2 plat-cta">
+    <h2 class="cta-h anim">Ready to build on MDOS?</h2>
+    <p class="cta-sub anim">Whether you're a developer, builder, or investor — if you're ready to move beyond the old way of building, we want to hear from you.</p>
+    <div class="hero-btns anim cta-btns">
+      <button data-contact-trigger class="plat-btn-p">Join the Alpha Program</button>
+      <button data-contact-trigger class="plat-btn-s">Contact MDI →</button>
+    </div>
+    <div class="cta-cards">
+      <div class="cta-card anim">
+        <div class="cta-card-t">Developers & Builders</div>
+        <div class="cta-card-d">Join the Alpha JV program. Co-develop real projects, access the full MDOS stack, and lock in preferred terms before launch.</div>
+      </div>
+      <div class="cta-card anim">
+        <div class="cta-card-t">Investors & Partners</div>
+        <div class="cta-card-d">MDI is building its early adopter network toward Beta Launch. Interested in the trajectory? Let's talk.</div>
+      </div>
+      <div class="cta-card anim">
+        <div class="cta-card-t">Tech & Robotic Partners</div>
+        <div class="cta-card-d">MDOS is technology-agnostic and expanding its certified partner network. Build construction tech? We want to integrate.</div>
+      </div>
+    </div>
+    <div class="plat-foot">
+      <span>© 2025 MDI</span>
+      <span><a href="mailto:edgar@modernedevelopment.com">edgar@modernedevelopment.com</a></span>
+      <span><a href="https://www.instagram.com/moderne_development/" target="_blank" rel="noopener">Instagram</a></span>
+    </div>
+  </section>
+
   <ContactModal />
 
 </Layout>
+
+<style is:global>
+
+
+  /* ── Scroll progress bar ─────────────────────────────────── */
+  #prog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--plat-green);
+    z-index: 10000;
+    width: 0%;
+    pointer-events: none;
+    transition: width 0.1s linear;
+  }
+
+  /* ── Scroll animation base ───────────────────────────────── */
+  .anim {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .anim.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Keyframes ───────────────────────────────────────────── */
+  @keyframes platSlideUp {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes platFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes platPulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1; }
+  }
+  @keyframes platTicker {
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── Shared typography helpers ───────────────────────────── */
+  .plat-lbl {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--plat-green);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .plat-sh {
+    font-family: var(--plat-font);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--plat-dark);
+  }
+  .plat-sp {
+    font-family: var(--plat-font);
+    font-size: 15px;
+    color: var(--plat-muted);
+    line-height: 1.75;
+    max-width: 580px;
+    font-weight: 300;
+  }
+
+  /* ── Background helpers ──────────────────────────────────── */
+  .plat-bg1 { background: var(--plat-bg1); }
+  .plat-bg2 { background: var(--plat-bg2); }
+  .plat-forest { background: var(--plat-forest); }
+
+  /* ── Section inner ───────────────────────────────────────── */
+  .si {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 96px 52px;
+  }
+  @media (max-width: 768px) {
+    .si { padding: 64px 20px; }
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────── */
+  .plat-btn-p {
+    font-family: var(--plat-font);
+    background: var(--plat-forest);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .plat-btn-p:hover { background: var(--plat-green); }
+  .plat-btn-s {
+    font-family: var(--plat-font);
+    background: var(--plat-bg1);
+    color: var(--plat-dark);
+    border: 1px solid var(--plat-border);
+    padding: 12px 24px;
+    font-size: 13px;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+  }
+  .plat-btn-s:hover { border-color: var(--plat-border-g); }
+
+  /* ── HERO ────────────────────────────────────────────────── */
+  .plat-hero {
+    min-height: 100vh;
+    background: var(--plat-bg1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 52px 80px;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .plat-hero { padding: 100px 20px 72px; }
+  }
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,102,63,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(56,102,63,0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: var(--plat-green);
+    border: 1px solid var(--plat-border-g);
+    background: rgba(56,102,63,0.05);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: platFadeUp 0.7s 0.3s both;
+  }
+  .chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--plat-green);
+    flex-shrink: 0;
+    animation: platPulse 2s ease-in-out infinite;
+  }
+  .hero-h1 {
+    font-family: var(--plat-font);
+    font-size: clamp(40px, 6.5vw, 80px);
+    font-weight: 600;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .ln {
+    display: block;
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  .ln.a1 { animation: platSlideUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.45s both; color: var(--plat-dark); }
+  .ln.a2 { animation: platSlideUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.58s both; color: var(--plat-green); }
+  .hero-sub {
+    font-family: var(--plat-font);
+    font-size: 17px;
+    color: var(--plat-muted);
+    line-height: 1.75;
+    max-width: 580px;
+    margin: 0 auto 32px;
+    font-weight: 300;
+    opacity: 0;
+    animation: platFadeUp 0.9s 0.92s both;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: platFadeUp 0.9s 1.08s both;
+  }
+  .hero-proof {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--plat-border);
+    opacity: 0;
+    animation: platFadeUp 0.9s 1.25s both;
+  }
+  .hp { text-align: center; }
+  .hp-v {
+    font-family: var(--plat-font);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--plat-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+  }
+  .hp-k {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: var(--plat-muted);
+  }
+
+  /* ── Ticker ──────────────────────────────────────────────── */
+  .ticker {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid var(--plat-border);
+    background: var(--plat-bg1);
+    padding: 9px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 3;
+  }
+  .ticker-track {
+    display: inline-block;
+    animation: platTicker 30s linear infinite;
+  }
+  .ti {
+    display: inline-block;
+    margin: 0 28px;
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: var(--plat-muted);
+    letter-spacing: 0.04em;
+  }
+  .ts {
+    font-size: 8px;
+    color: var(--plat-green);
+    opacity: 0.5;
+    margin: 0 2px;
+    vertical-align: middle;
+  }
+
+  /* ── Stats row ───────────────────────────────────────────── */
+  .stats-row {
+    background: var(--plat-forest);
+    padding: 28px 52px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 640px) {
+    .stats-row { grid-template-columns: 1fr 1fr; gap: 24px; padding: 28px 20px; }
+  }
+  .stat {
+    padding: 0 20px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .stat:first-child { padding-left: 0; text-align: left; }
+  .stat:last-child { border-right: none; }
+  @media (max-width: 640px) {
+    .stat { border-right: none; text-align: left; padding: 0; }
+    .stat:first-child { text-align: left; }
+  }
+  .sv {
+    font-family: var(--plat-font);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+  .sk {
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── What is MDOS ────────────────────────────────────────── */
+  .what-g {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .what-g { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .what-imgbox {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 480px;
+    position: relative;
+    border: 1px solid var(--plat-border);
+  }
+  @media (max-width: 900px) {
+    .what-imgbox { height: 280px; }
+  }
+  .what-imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .what-imgbox:hover img { transform: scale(1.02); }
+  .what-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--plat-border);
+    padding: 7px 12px;
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: var(--plat-dark);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .bp {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--plat-green);
+    flex-shrink: 0;
+    animation: platPulse 2s ease-in-out infinite;
+  }
+  .callouts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .callout {
+    padding: 14px 16px;
+    border: 1px solid var(--plat-border);
+    border-radius: 8px;
+    background: var(--plat-bg1);
+    transition: border-color 0.2s;
+  }
+  .callout:hover { border-color: var(--plat-border-g); }
+  .ct {
+    font-family: var(--plat-font);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--plat-dark);
+    margin-bottom: 3px;
+  }
+  .cd {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: var(--plat-muted);
+    line-height: 1.6;
+  }
+
+  /* ── Modules tabs ────────────────────────────────────────── */
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 36px;
+    overflow-x: auto;
+    padding: 4px;
+    background: var(--plat-bg2);
+    border-radius: 8px;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    font-family: var(--plat-font);
+    font-size: 11px;
+    padding: 9px 16px;
+    background: transparent;
+    border: none;
+    color: var(--plat-muted);
+    transition: all 0.2s;
+    white-space: nowrap;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .tab-btn:hover { color: var(--plat-dark); }
+  .tab-btn.active {
+    background: var(--plat-bg1);
+    color: var(--plat-dark);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .tab-panel {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .tab-panel.active { display: grid; }
+  @media (max-width: 768px) {
+    .tab-panel.active { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .module-h {
+    font-family: var(--plat-font);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--plat-dark);
+  }
+  .module-sub {
+    font-family: var(--plat-font);
+    font-size: 14px;
+    color: var(--plat-muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .specs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .spec {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--plat-border);
+    border-radius: 8px;
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: var(--plat-muted);
+    line-height: 1.55;
+    background: var(--plat-bg2);
+  }
+  .spec-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--plat-green);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .spec b {
+    color: var(--plat-dark);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .module-img {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 320px;
+    position: relative;
+    border: 1px solid var(--plat-border);
+  }
+  .module-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+    transition: filter 0.4s;
+  }
+  .module-img:hover img { filter: brightness(0.95) saturate(1); }
+  .module-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--plat-border);
+    color: var(--plat-dark);
+    padding: 5px 10px;
+    font-family: var(--plat-font);
+    font-size: 11px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  /* ── Pipeline ────────────────────────────────────────────── */
+  .pipe-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 52px;
+    align-items: center;
+    margin-bottom: 44px;
+  }
+  @media (max-width: 768px) {
+    .pipe-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px; }
+  }
+  .pipe-steps {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 1024px) {
+    .pipe-steps { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .pipe-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  .pipe-step {
+    padding: 20px 16px;
+    background: var(--plat-bg1);
+    border: 1px solid var(--plat-border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+  .pipe-step:hover { border-color: var(--plat-border-g); }
+  .pipe-num {
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: var(--plat-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .pipe-t {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--plat-dark);
+    margin-bottom: 4px;
+  }
+  .pipe-d {
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: var(--plat-muted);
+    line-height: 1.55;
+  }
+  .pipe-bar {
+    height: 2px;
+    background: var(--plat-green);
+    margin-top: 12px;
+    width: 0;
+    transition: width 0.6s 0.2s ease-out;
+    border-radius: 1px;
+  }
+  .pipe-step.bar-in .pipe-bar { width: 24px; }
+
+  /* ── IP cards ────────────────────────────────────────────── */
+  .ip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  @media (max-width: 640px) {
+    .ip-grid { grid-template-columns: 1fr; }
+  }
+  .ip-card {
+    padding: 24px;
+    border: 1px solid var(--plat-border);
+    border-radius: 10px;
+    background: var(--plat-bg2);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .ip-card:hover {
+    border-color: var(--plat-border-g);
+    box-shadow: 0 4px 20px rgba(56,102,63,0.06);
+  }
+  .ip-num {
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: var(--plat-green);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .ip-card h3 {
+    font-family: var(--plat-font);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 7px;
+    color: var(--plat-dark);
+  }
+  .ip-card p {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: var(--plat-muted);
+    line-height: 1.65;
+  }
+
+  /* ── Alpha JV ────────────────────────────────────────────── */
+  .alpha-lbl { color: var(--plat-gold) !important; }
+  .alpha-sh { color: #fff !important; }
+  .alpha-sp { color: rgba(255,255,255,0.55) !important; }
+  .alpha-g {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .alpha-g { grid-template-columns: 1fr; gap: 48px; }
+  }
+  .alpha-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .alpha-li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    border-radius: 6px;
+  }
+  .alpha-li b {
+    color: #fff;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .ali-n {
+    font-family: var(--plat-font);
+    font-size: 10px;
+    color: var(--plat-gold);
+    flex-shrink: 0;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+  .alpha-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .abox {
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+  }
+  .abox-lbl {
+    font-family: var(--plat-font);
+    font-size: 10px;
+    color: var(--plat-gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .abox-v {
+    font-family: var(--plat-font);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+    letter-spacing: -0.015em;
+  }
+  .abox-d {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.55;
+  }
+
+  /* ── CTA section ─────────────────────────────────────────── */
+  .plat-cta {
+    text-align: center;
+    padding: 96px 52px;
+  }
+  @media (max-width: 768px) {
+    .plat-cta { padding: 64px 20px; }
+  }
+  .cta-h {
+    font-family: var(--plat-font);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    color: var(--plat-dark);
+  }
+  .cta-sub {
+    font-family: var(--plat-font);
+    font-size: 15px;
+    color: var(--plat-muted);
+    line-height: 1.75;
+    max-width: 540px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+  }
+  .cta-btns {
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .cta-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 960px;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+  @media (max-width: 768px) {
+    .cta-cards { grid-template-columns: 1fr; }
+  }
+  .cta-card {
+    padding: 20px 22px;
+    border: 1px solid var(--plat-border);
+    border-radius: 10px;
+    background: var(--plat-bg1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .cta-card:hover {
+    border-color: var(--plat-border-g);
+    box-shadow: 0 4px 20px rgba(56,102,63,0.06);
+  }
+  .cta-card-t {
+    font-family: var(--plat-font);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--plat-dark);
+  }
+  .cta-card-d {
+    font-family: var(--plat-font);
+    font-size: 12px;
+    color: var(--plat-muted);
+    line-height: 1.6;
+  }
+  .plat-foot {
+    border-top: 1px solid var(--plat-border);
+    padding-top: 24px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--plat-font);
+    font-size: 11px;
+    color: var(--plat-muted);
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .plat-foot a { color: var(--plat-muted); text-decoration: none; }
+  .plat-foot a:hover { color: var(--plat-green); }
+</style>
+
+<script>
+  // ── Scroll progress bar ───────────────────────────────────
+  const prog = document.getElementById('prog');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    if (prog && total > 0) prog.style.width = (scrolled / total * 100) + '%';
+  }, { passive: true });
+
+  // ── Intersection observer for .anim elements ──────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const anims = entry.target.querySelectorAll('.anim');
+      anims.forEach((el, i) => {
+        setTimeout(() => el.classList.add('in'), i * 75);
+      });
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('section, .stats-row').forEach(el => observer.observe(el));
+
+  // ── Pipeline bar animation ────────────────────────────────
+  const pipeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('bar-in');
+      pipeObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.pipe-step').forEach(el => pipeObserver.observe(el));
+
+  // ── Tabs ──────────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.tab-group');
+      if (!group) return;
+      group.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      group.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const tabId = (btn as HTMLButtonElement).dataset.tab;
+      if (tabId) group.querySelector('#' + tabId)?.classList.add('active');
+    });
+  });
+
+  // ── Explore button scrolls to modules ────────────────────
+  document.getElementById('explore-btn')?.addEventListener('click', () => {
+    document.getElementById('modules')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>

@@ -38,15 +38,95 @@ const {
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" />
     </noscript>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <div id="cur" aria-hidden="true"></div>
+    <div id="cur-r" aria-hidden="true"></div>
     <slot />
   </body>
 </html>
+
+<style>
+  @media (pointer: fine) {
+    body, a, button, [role="button"], input, label, select, textarea { cursor: none; }
+  }
+
+  /* Dot — mix-blend-mode: difference inverts against the background:
+     white on dark sections, dark on light sections — no JS needed */
+  #cur {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    mix-blend-mode: difference;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    display: none;
+    transition: width 0.15s ease, height 0.15s ease;
+  }
+
+  /* Ring — same blend mode so it's visible on any background */
+  #cur-r {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    mix-blend-mode: difference;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    display: none;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s;
+  }
+
+  /* Hover state — ring grows noticeably, dot enlarges */
+  #cur.hovering {
+    width: 14px;
+    height: 14px;
+  }
+  #cur-r.hovering {
+    transform: translate(-50%, -50%) scale(1.9);
+    opacity: 0.6;
+  }
+
+  @media (pointer: fine) {
+    #cur, #cur-r { display: block; }
+  }
+</style>
+
+<script>
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-r');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
+  }, { passive: true });
+
+  (function tick() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+    requestAnimationFrame(tick);
+  })();
+
+  // Toggle .hovering when over any interactive element
+  const CLICKABLE = 'a, button, [role="button"], input, label, select, textarea, [tabindex]';
+  document.addEventListener('mouseover', (e) => {
+    const over = !!(e.target as Element).closest(CLICKABLE);
+    cur?.classList.toggle('hovering', over);
+    ring?.classList.toggle('hovering', over);
+  });
+</script>

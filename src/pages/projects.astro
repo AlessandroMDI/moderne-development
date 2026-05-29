@@ -6,24 +6,10 @@ import ContactModal from '../components/ContactModal.astro';
 import { Image } from 'astro:assets';
 
 // ─── IMAGE IMPORTS ────────────────────────────────────────────────────────────
-// To add a new image: import it here, then reference it in the data below.
 import clarksvilleImg from '../assets/images/projects/clarskville.jpg';
 import multiUnitImg from '../assets/images/projects/multi-unit.jpg';
 
 // ─── PROJECT DATA ─────────────────────────────────────────────────────────────
-// To add a new category: add an object to this array.
-// To add a new project inside a category: add an object to that category's `projects` array.
-//
-// Each category:
-//   label    — displayed as the section heading
-//   projects — array of project objects (can be empty if content is pending)
-//
-// Each project:
-//   name     — displayed as the subheading
-//   img      — imported image variable from above (or null for placeholder)
-//   alt      — image alt text
-//   body     — array of paragraph strings
-
 const categories = [
   {
     label: 'Multi-Unit',
@@ -33,10 +19,9 @@ const categories = [
         img: multiUnitImg,
         alt: 'Lighthouse Resort Orlando — 600-unit condo-hotel development on Lake Cecile, Kissimmee, Florida',
         body: [
-          '600 units. Eight buildings. Lighthouse Resort Orlando is a luxury condo-hotel development on the shores of Lake Cecile in Kissimmee, Florida — 3.5 miles from Walt Disney World on its primary access road.',
-          'General contractor Shawmut Design and Construction, an ENR Top 40 firm with $2.1 billion in annual revenue, is delivering the project using tunnel form concrete construction with 3D printing integration. The existing Berkley Orlando buildings on the same site are full concrete construction and require only cosmetic renovation.',
-          'The Berkley Orlando currently operates at 91% occupancy and holds the number one TripAdvisor ranking for the area. The expanded 600-unit development projects blended occupancy at 82% with an estimated per-unit NOI of $83,000 annually.',
+          'Six hundred unit resort in Central Florida.',
         ],
+        link: { href: 'https://lighthouseresort-orlando.com/', label: 'Visit Lighthouse Resort' },
       },
     ],
   },
@@ -48,23 +33,11 @@ const categories = [
         img: clarksvilleImg,
         alt: 'Clarksville residential development — West Lynn and 14th Street, Austin, Texas',
         body: [
-          'Four homes at West Lynn and 14th Street in Austin, Texas. The site sits in the Clarksville neighborhood on a half-acre parcel, surrounded by an existing mix of coffee shops and small offices being redeveloped on the same block.',
-          "Each home is built using ICON's Titan print system — the same 3D concrete printing technology behind the world's largest printed communities. Homes range from 2,200 to 3,500 square feet across four-bedroom and five-bedroom floor plans, with construction scheduled to begin in late 2026.",
-          'Projected at $1,350 to $1,400 per square foot, the pricing compares favorably to comparable West Lynn condos at $1,700 per square foot. Construction completion is targeted for summer 2027.',
+          'Four luxury spec homes in Clarksville, one of Austin\'s most sought-after neighborhoods.',
+          'Modstone is part of MDIs Alpha program. Clarksville is among their current projects.',
         ],
+        link: { href: 'https://modstonehomes.com/#projects', label: 'View the project on ModStone' },
       },
-    ],
-  },
-  {
-    label: 'Commercial',
-    projects: [
-      // TODO: client to provide
-      // {
-      //   name: 'Project Name',
-      //   img: null,
-      //   alt: '',
-      //   body: ['Paragraph one.', 'Paragraph two.'],
-      // },
     ],
   },
 ];
@@ -76,104 +49,81 @@ const categories = [
 >
   <Navbar />
 
-  <!-- Page header -->
-  <section class="bg-surface-cream px-5 md:px-10 lg:px-20 pt-14 lg:pt-16 border-b border-text-divider">
-    <div class="max-w-[1280px] mx-auto pt-16 pb-14 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20">
-
-      <!-- Back nav -->
-      <a
-        href="/"
-        class="inline-flex items-center gap-2 font-sans text-xs font-medium tracking-widest uppercase text-text-secondary hover:text-text-primary transition-colors duration-200 mb-8 lg:mb-10"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Page hero -->
+  <section class="proj-hero">
+    <div class="proj-hero-gradient"></div>
+    <div class="proj-hero-dotgrid"></div>
+    <div class="proj-hero-inner">
+      <a href="/" class="proj-back-nav">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Home
       </a>
-
-      <h1 class="font-display text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-tight uppercase text-text-primary">
-        Our <span class="text-brand-gold">Projects</span>
+      <h1 class="proj-h1">
+        <span class="proj-ln proj-a1">Projects Powered By</span>
+        <span class="proj-ln proj-a2">MDI</span>
       </h1>
-
     </div>
   </section>
 
-  <!-- Project sections — rendered from data above -->
+  <!-- Project sections -->
   {categories.map((category) => (
-    <section class="bg-surface-cream px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28 border-b border-text-divider">
-      <div class="max-w-[1280px] mx-auto">
-
-        <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary mb-10 lg:mb-14">
-          {category.label}
-        </h2>
+    <section class="px-5 py-8 md:px-10 md:py-10 lg:px-20 lg:py-14" style="background:var(--bg1)">
+      <div class="max-w-[1120px] mx-auto">
 
         {category.projects.length === 0 ? (
-          <!-- Placeholder when no projects are defined yet -->
-          <div class="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-20">
-            <div class="lg:w-7/12">
-              <p class="font-sans text-base leading-relaxed text-text-secondary">
-                Project details coming soon.
-              </p>
-            </div>
-            <div class="lg:w-5/12 shrink-0">
-              <div class="aspect-[4/3] bg-surface-dark flex items-center justify-center">
-                <span class="font-sans text-xs text-text-secondary">Photography pending</span>
+          <div class="proj-g">
+            <div class="proj-imgbox">
+              <div class="proj-placeholder">
+                <span>Photography pending</span>
               </div>
+            </div>
+            <div class="proj-content">
+              <p class="proj-body">Project details coming soon.</p>
             </div>
           </div>
         ) : (
-          <div class="flex flex-col gap-16 lg:gap-24">
+          <div class="flex flex-col gap-20 lg:gap-28">
             {category.projects.map((project) => (
-              <div class="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-20">
+              <div class="proj-g">
 
-                <!-- Text column -->
-                <div class="lg:w-7/12">
-                  <h3 class="font-display text-[20px] md:text-[24px] lg:text-[28px] leading-none tracking-tight uppercase text-text-primary mb-5">
-                    {project.name}
-                  </h3>
-
-                  <!-- Image — mobile/tablet only (after subhead, before body) -->
-                  <div class="lg:hidden mb-6">
-                    {project.img ? (
-                      <Image
-                        src={project.img}
-                        alt={project.alt}
-                        widths={[375, 640, 960]}
-                        sizes="100vw"
-                        loading="lazy"
-                        quality={80}
-                        class="w-full aspect-[4/3] object-cover"
-                      />
-                    ) : (
-                      <div class="aspect-[4/3] bg-surface-dark flex items-center justify-center">
-                        <span class="font-sans text-xs text-text-secondary">Photography pending</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {project.body.map((para, i) => (
-                    <p class={`font-sans text-base leading-relaxed text-text-primary${i < project.body.length - 1 ? ' mb-4' : ''}`}>
-                      {para}
-                    </p>
-                  ))}
-                </div>
-
-                <!-- Image column — desktop only -->
-                <div class="hidden lg:block lg:w-5/12 shrink-0">
+                <!-- Image -->
+                <div class="proj-imgbox">
                   {project.img ? (
                     <Image
                       src={project.img}
                       alt={project.alt}
-                      widths={[375, 640, 960]}
-                      sizes="50vw"
+                      widths={[480, 800, 1200]}
+                      sizes="(max-width: 900px) 100vw, 50vw"
                       loading="lazy"
                       quality={80}
-                      class="w-full aspect-[4/3] object-cover"
                     />
                   ) : (
-                    <div class="aspect-[4/3] bg-surface-dark flex items-center justify-center">
-                      <span class="font-sans text-xs text-text-secondary">Photography pending</span>
+                    <div class="proj-placeholder">
+                      <span>Photography pending</span>
                     </div>
+                  )}
+                </div>
+
+                <!-- Content -->
+                <div class="proj-content">
+                  <h2 class="proj-name">{project.name}</h2>
+                  {project.body.map((para) => (
+                    <p class="proj-body">{para}</p>
+                  ))}
+                  {'link' in project && project.link && (
+                    <a
+                      href={project.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="proj-link"
+                    >
+                      {project.link.label}
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
                   )}
                 </div>
 
@@ -190,3 +140,198 @@ const categories = [
   <ContactModal />
 
 </Layout>
+
+<style is:global>
+  @keyframes projPulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1; }
+  }
+  @keyframes projSlideUp {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes projFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .proj-hero {
+    background: var(--bg1);
+    position: relative;
+    overflow: hidden;
+    padding: 140px 52px 100px;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .proj-hero { padding: 120px 20px 80px; }
+  }
+
+  .proj-hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,102,63,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .proj-hero-dotgrid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(56,102,63,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .proj-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .proj-back-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--site-font);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 150ms;
+    opacity: 0;
+    animation: projFadeUp 0.7s 0.2s both;
+  }
+  .proj-back-nav:hover { color: var(--dark); }
+
+  .proj-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--site-font);
+    font-size: 12px;
+    color: var(--green);
+    border: 1px solid var(--bdr-g);
+    background: rgba(56,102,63,0.05);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .proj-chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    animation: projPulse 2s ease-in-out infinite;
+  }
+
+  .proj-h1 {
+    font-family: var(--site-font);
+    font-size: clamp(36px, 5.5vw, 68px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--dark);
+    overflow: hidden;
+  }
+  .proj-ln {
+    display: block;
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  .proj-a1 { animation: projSlideUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.45s both; color: var(--dark); }
+  .proj-a2 { animation: projSlideUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.58s both; color: #b8952a; }
+
+  /* ── Project grid ──────────────────────────────────────────── */
+  .proj-g {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .proj-g {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .proj-imgbox {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 230px;
+    border: 1px solid var(--bdr);
+    position: relative;
+  }
+  @media (max-width: 900px) {
+    .proj-imgbox { height: 140px; }
+  }
+  .proj-imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .proj-imgbox:hover img { transform: scale(1.02); }
+
+  .proj-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg2);
+  }
+  .proj-placeholder span {
+    font-family: var(--site-font);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .proj-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .proj-name {
+    font-family: var(--site-font);
+    font-size: clamp(24px, 2.8vw, 36px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .proj-body {
+    font-family: var(--site-font);
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+  .proj-body:last-of-type { margin-bottom: 0; }
+
+  .proj-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--site-font);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--green);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 150ms;
+    margin-top: 20px;
+  }
+  .proj-link:hover { color: var(--dark); }
+</style>

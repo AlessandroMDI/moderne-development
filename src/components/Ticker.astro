@@ -7,16 +7,13 @@ const items = [
   'Design Once, Deploy Many',
   'Patents Filed: 4 + 10 in Preparation',
 ];
-
-const separator = '·';
 ---
 
-<div class="bg-surface-dark overflow-hidden whitespace-nowrap border-t border-white/10">
+<div style="background:var(--bg1);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);overflow:hidden;white-space:nowrap">
   <div class="flex animate-marquee">
-    {/* Duplicate the list twice so the loop is seamless */}
-    {[...items, ...items].map((item, i) => (
-      <span class="inline-flex items-center gap-5 px-5 py-2.5 font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold shrink-0">
-        <span class="text-brand-gold/40">{separator}</span>
+    {[...items, ...items].map((item) => (
+      <span style="display:inline-flex;align-items:center;gap:20px;padding:10px 28px;font-family:var(--site-font);font-size:11px;letter-spacing:0.04em;color:var(--muted);flex-shrink:0">
+        <span style="font-size:7px;color:var(--green);opacity:0.6">&#9670;</span>
         {item}
       </span>
     ))}

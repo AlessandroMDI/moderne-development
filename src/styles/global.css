@@ -2,26 +2,54 @@
 
 @theme {
   /* Brand Colors */
-  --color-brand-green: #044239;
-  --color-brand-gold: #EBBB10;
-  --color-brand-gold-light: #EED688;
-  --color-brand-gold-dark: #C3922E;
-  --color-surface-cream: #F5F2EC;
-  --color-surface-warm: #FAFAF8;
-  --color-surface-dark: #2B3A2A;
-  --color-text-primary: #1A1A18;
-  --color-text-secondary: #888885;
-  --color-text-divider: #D4D2CD;
+  --color-brand-green: #38663f;
+  --color-brand-forest: #1a4a3a;
+  --color-brand-gold: #b8952a;
+  --color-surface-cream: #ffffff;
+  --color-surface-light: #f6f8f6;
+  --color-surface-warm: #f6f8f6;
+  --color-surface-dark: #1a4a3a;
+  --color-text-primary: #0d1310;
+  --color-text-secondary: #637066;
+  --color-text-divider: rgba(13,19,16,0.08);
+  --color-border: rgba(13,19,16,0.08);
+  --color-border-green: rgba(56,102,63,0.15);
 
   /* Fonts */
   --font-display: "Bebas Neue", sans-serif;
-  --font-sans: "Inter", sans-serif;
+  --font-sans: "Geist", "Inter", system-ui, sans-serif;
 
   /* Custom Spacing */
   --spacing-18: 72px;
   --spacing-22: 88px;
   --spacing-30: 120px;
   --spacing-36: 144px;
+}
+
+/* Site-wide CSS custom properties — used directly in section styles */
+:root {
+  --bg1: #ffffff;
+  --bg2: #f6f8f6;
+  --forest: #1a4a3a;
+  --green: #38663f;
+  --gold: rgba(200,169,110,0.85);
+  --dark: #0d1310;
+  --muted: #637066;
+  --bdr: rgba(13,19,16,0.08);
+  --bdr-g: rgba(56,102,63,0.15);
+  --site-font: 'Geist', 'Inter', system-ui, sans-serif;
+
+  /* platform.astro aliases — single source of truth */
+  --plat-bg1: var(--bg1);
+  --plat-bg2: var(--bg2);
+  --plat-forest: var(--forest);
+  --plat-green: var(--green);
+  --plat-gold: var(--gold);
+  --plat-dark: var(--dark);
+  --plat-muted: var(--muted);
+  --plat-border: var(--bdr);
+  --plat-border-g: var(--bdr-g);
+  --plat-font: var(--site-font);
 }
 
 @keyframes marquee {
@@ -35,106 +63,103 @@
     will-change: transform;
   }
 
-  /* Card 3D — same geometry as btn-3d, depth goes left+down */
-  .card-3d-wrapper {
-    position: relative;
-    height: 100%;
+  /* Section label — small green uppercase text above heading */
+  .site-lbl {
+    font-family: var(--site-font);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
   }
 
-  .card-3d-depth {
-    position: absolute;
-    inset: 0;
-    background-color: #A07A1A;
-    transform: translate(-6px, 6px);
+  /* Section heading — Geist, weight 600, tight tracking */
+  .site-sh {
+    font-family: var(--site-font);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--dark);
   }
 
-  .card-3d-left {
-    position: absolute;
-    top: 0;
-    left: -6px;
-    width: 6px;
-    height: 100%;
-    background-color: #A07A1A;
-    transform: skewY(-45deg);
-    transform-origin: top right;
+  /* Inverse heading for dark-bg sections */
+  .site-sh-inv {
+    color: #ffffff;
   }
 
-  .card-3d-bottom {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background-color: #6B5010;
-    transform: skewX(-45deg);
-    transform-origin: top left;
+  /* Section body paragraph */
+  .site-sp {
+    font-family: var(--site-font);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 580px;
   }
 
-  .card-3d-face {
-    position: relative;
-    z-index: 10;
-    height: 100%;
+  /* Section inner wrapper */
+  .site-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 96px 52px;
   }
 
-  .btn-3d-wrapper {
-    position: relative;
-    display: inline-block;
+  @media (max-width: 768px) {
+    .site-inner {
+      padding: 64px 20px;
+    }
   }
 
-  /* Back face — same size as front, shifted left and down */
-  .btn-3d-depth {
-    position: absolute;
-    inset: 0;
-    background-color: #C3922E;
-    transform: translate(-6px, 6px);
-    transition: opacity 150ms;
+  /* Primary button */
+  .site-btn-p {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--site-font);
+    background: var(--forest);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 150ms;
+    text-decoration: none;
+  }
+  .site-btn-p:hover { background: var(--green); }
+
+  /* Secondary button */
+  .site-btn-s {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--site-font);
+    background: var(--bg1);
+    color: var(--dark);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--bdr);
+    cursor: pointer;
+    transition: border-color 150ms, box-shadow 150ms;
+    text-decoration: none;
+  }
+  .site-btn-s:hover {
+    border-color: var(--bdr-g);
+    box-shadow: 0 2px 8px rgba(56,102,63,0.08);
   }
 
-  /* Left wall — parallelogram connecting front-left edge to back-left edge */
-  .btn-3d-left {
-    position: absolute;
-    top: 0;
-    left: -6px;
-    width: 6px;
-    height: 100%;
-    background-color: #C3922E;
-    transform: skewY(-45deg);
-    transform-origin: top right;
-    transition: opacity 150ms;
+  /* Standard card */
+  .site-card {
+    background: var(--bg1);
+    border: 1px solid var(--bdr);
+    border-radius: 10px;
+    padding: 24px;
+    transition: border-color 150ms, box-shadow 150ms;
   }
-
-  /* Bottom wall — parallelogram connecting front-bottom edge to back-bottom edge */
-  .btn-3d-bottom {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background-color: #7A5518;
-    transform: skewX(-45deg);
-    transform-origin: top left;
-    transition: opacity 150ms;
-  }
-
-  /* Front face */
-  .btn-3d-face {
-    position: relative;
-    z-index: 10;
-    transition: transform 150ms, background-color 150ms;
-  }
-
-  .btn-3d-wrapper:hover .btn-3d-face {
-    background-color: #C3922E;
-  }
-
-  .btn-3d-wrapper:active .btn-3d-face {
-    transform: translate(-6px, 6px);
-  }
-
-  .btn-3d-wrapper:active .btn-3d-depth,
-  .btn-3d-wrapper:active .btn-3d-left,
-  .btn-3d-wrapper:active .btn-3d-bottom {
-    opacity: 0;
+  .site-card:hover {
+    border-color: var(--bdr-g);
+    box-shadow: 0 4px 16px rgba(56,102,63,0.08);
   }
 }
 

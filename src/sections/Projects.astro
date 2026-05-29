@@ -25,9 +25,9 @@ const categories = [
     imgAlt: 'Residential development project',
     imgPosition: '45% center',
     body: [
-      "We build homes using advanced robotics, automated building systems, and 3D concrete printing. The technology isn’t the point — the output is. Homes built through this process are more precise, take less time to complete, and perform better structurally than most site-built alternatives.",
+      "We build homes using advanced robotics, automated building systems, and 3D concrete printing. The technology isn't the point — the output is. Homes built through this process are more precise, take less time to complete, and perform better structurally than most site-built alternatives.",
       "MMC reduces material waste and allows for tighter tolerances at every stage of construction. We design for durability from the start, not as an afterthought.",
-      "The people who will live in these homes aren’t thinking about the construction method. They shouldn’t have to. That’s what we handle.",
+      "The people who will live in these homes aren't thinking about the construction method. They shouldn't have to. That's what we handle.",
     ],
   },
   {
@@ -46,38 +46,33 @@ const categories = [
 ];
 ---
 
-<section id="projects" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16 px-5 pt-16 pb-12 md:px-10 md:pt-20 md:pb-14 lg:px-20 lg:pt-28 lg:pb-20">
-  <div class="max-w-[1280px] mx-auto">
+<section id="projects" class="scroll-mt-14 lg:scroll-mt-16" style="background:var(--bg1)">
+  <div class="site-inner">
 
     <!-- Section header -->
     <div class="mb-10 lg:mb-14">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="block w-6 h-px bg-brand-gold"></span>
-        <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Projects</span>
-      </div>
+      <span class="site-lbl block mb-4">Our Projects</span>
       <div class="md:flex md:items-end md:justify-between md:gap-6">
         <div>
-          <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary">
-            Projects Powered by <span class="text-brand-gold">MDI.</span>
+          <h2 class="site-sh">
+            Projects Powered by <span style="color:#b8952a">MDI.</span>
           </h2>
-          <p class="font-sans text-base leading-relaxed text-text-secondary mt-4 max-w-[600px]">
+          <p class="site-sp mt-4">
             Actively delivering projects across the US and UK — validating the platform in real-world conditions.
           </p>
         </div>
-        <a
-          href="/projects"
-          class="mt-6 md:mt-0 shrink-0 inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
-        >
+        <a href="/projects" class="site-btn-p mt-6 md:mt-0 shrink-0">
           See Our Projects
         </a>
       </div>
     </div>
 
     <!-- Card grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-[3px] bg-text-divider" id="projects-grid">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projects-grid">
       {categories.map((cat) => (
         <button
-          class="project-card relative overflow-hidden cursor-pointer group text-left bg-surface-cream focus:outline-none"
+          class="project-card relative overflow-hidden rounded-xl cursor-pointer group text-left focus:outline-none"
+          style="background:var(--bg1)"
           aria-expanded="false"
           data-card={cat.id}
         >
@@ -93,42 +88,48 @@ const categories = [
               style={cat.imgPosition ? `object-position: ${cat.imgPosition}` : undefined}
             />
             <!-- Gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/100 via-black/40 via-[15%] to-transparent"></div>
-            <!-- Active indicator: gold top bar -->
-            <div class="project-card-indicator absolute top-0 left-0 right-0 h-[3px] bg-brand-gold opacity-0 transition-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 via-[15%] to-transparent"></div>
+            <!-- indicator element kept for JS compatibility — visual handled via CSS on aria-expanded -->
+            <div class="project-card-indicator hidden"></div>
             <!-- Label text -->
             <div class="absolute bottom-0 left-0 p-5 lg:p-7">
-              <span class="block font-display text-[26px] lg:text-[30px] uppercase leading-none text-white">{cat.title}</span>
+              <span class="block leading-none text-white proj-label">{cat.title}</span>
             </div>
           </div>
         </button>
       ))}
     </div>
 
-    <!-- Content panels (full-width, below cards — desktop accordion only) -->
-    {categories.map((cat) => (
-      <div class="project-content hidden mt-[3px]" data-content={cat.id}>
-        <div class="bg-brand-green flex gap-8 lg:gap-12 px-8 py-10 lg:px-12 lg:py-12">
-          <div class="w-px bg-brand-gold flex-shrink-0 self-stretch"></div>
-          <div>
-            {cat.body.map((para) => (
-              <p class="font-sans text-base leading-relaxed text-white/80 mb-4 last:mb-0">{para}</p>
-            ))}
+    <!-- Content panels wrapper — height animates once on open/close; switching panels is a fade only -->
+    <div id="projects-panel-wrap" class="projects-wrap rounded-xl">
+      {categories.map((cat) => (
+        <div class="project-content" data-content={cat.id}>
+          <div class="bg-brand-green flex gap-8 lg:gap-12 px-8 py-10 lg:px-12 lg:py-12"
+               style="background:var(--bg2);min-height:220px">
+            <div class="w-px flex-shrink-0 self-stretch" style="background:var(--green)"></div>
+            <div>
+              {cat.body.map((para) => (
+                <p class="mb-4 last:mb-0" style="font-family:var(--site-font);font-size:15px;line-height:1.75;color:var(--muted)">{para}</p>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
 
   </div>
 </section>
 
-<!-- Mobile popup modal -->
+<!-- Mobile popup modal — bg-brand-green class kept as JS hook -->
 <div id="project-modal" class="fixed inset-0 z-50 hidden md:hidden" aria-modal="true" role="dialog">
   <div id="modal-backdrop" class="absolute inset-0 bg-black/60"></div>
-  <div class="absolute bottom-0 left-0 right-0 bg-brand-green max-h-[78vh] flex flex-col">
-    <div class="flex-shrink-0 flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/10">
-      <h3 id="modal-title" class="font-display text-[28px] uppercase text-white leading-none"></h3>
-      <button id="modal-close" aria-label="Close" class="text-white/50 hover:text-white transition-colors p-1 -mr-1">
+  <div class="bg-brand-green absolute bottom-0 left-0 right-0 max-h-[78vh] flex flex-col"
+       style="background:var(--bg1)">
+    <div class="flex-shrink-0 flex items-center justify-between px-8 pt-8 pb-6"
+         style="border-bottom:1px solid var(--bdr)">
+      <h3 id="modal-title" class="leading-none proj-label" style="color:var(--dark)"></h3>
+      <button id="modal-close" aria-label="Close" class="p-1 -mr-1 transition-colors"
+              style="color:var(--muted)" onmouseover="this.style.color=`var(--dark)`" onmouseout="this.style.color=`var(--muted)`">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -141,8 +142,50 @@ const categories = [
   </div>
 </div>
 
+<style>
+  .proj-label {
+    font-family: var(--site-font);
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .project-card {
+    transition: box-shadow 150ms;
+  }
+  .project-card[aria-expanded="true"] {
+    box-shadow: 0 0 0 4px white, 0 0 0 7px var(--green);
+  }
+
+  /* Wrapper handles height — only animates when going from 0→open or open→0 */
+  .projects-wrap {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 420ms cubic-bezier(0.4, 0, 0.2, 1),
+                margin-top 420ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .projects-wrap.has-open {
+    max-height: 600px;
+    margin-top: 1rem;
+  }
+
+  /* Individual panels just fade — no height change when switching */
+  .project-content {
+    display: none;
+  }
+  .project-content.is-open {
+    display: block;
+    animation: projFadeIn 220ms ease;
+  }
+  @keyframes projFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
 <script>
   const grid = document.getElementById('projects-grid');
+  const panelWrap = document.getElementById('projects-panel-wrap');
   const modal = document.getElementById('project-modal') as HTMLElement | null;
   const modalTitle = document.getElementById('modal-title') as HTMLElement | null;
   const modalBody = document.getElementById('modal-body') as HTMLElement | null;
@@ -154,7 +197,6 @@ const categories = [
     document.body.style.overflow = '';
     grid?.querySelectorAll('[data-card]').forEach(c => {
       c.setAttribute('aria-expanded', 'false');
-      (c.querySelector('.project-card-indicator') as HTMLElement | null)?.style.setProperty('opacity', '0');
     });
   }
 
@@ -170,7 +212,6 @@ const categories = [
       if (!card) return;
 
       const id = card.dataset.card!;
-      const indicator = card.querySelector('.project-card-indicator') as HTMLElement | null;
 
       if (window.innerWidth < 768) {
         // Mobile: show popup
@@ -178,12 +219,11 @@ const categories = [
         const parasDiv = content?.querySelector('.bg-brand-green > div:last-child');
         if (modalBody) modalBody.innerHTML = parasDiv?.innerHTML ?? '';
         if (modalTitle) {
-          const labelEl = card.querySelector('.font-display');
+          const labelEl = card.querySelector('.proj-label');
           modalTitle.textContent = labelEl?.textContent ?? '';
         }
         modal?.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        if (indicator) indicator.style.opacity = '1';
         card.setAttribute('aria-expanded', 'true');
         return;
       }
@@ -192,24 +232,29 @@ const categories = [
       const content = document.querySelector(`[data-content="${id}"]`) as HTMLElement | null;
 
       if (openId && openId !== id) {
+        // Switching panels: just swap content — wrapper height stays, no layout shift
         const prevContent = document.querySelector(`[data-content="${openId}"]`) as HTMLElement | null;
         const prevCard = grid.querySelector(`[data-card="${openId}"]`) as HTMLElement | null;
-        const prevIndicator = prevCard?.querySelector('.project-card-indicator') as HTMLElement | null;
-        prevContent?.classList.add('hidden');
+        prevContent?.classList.remove('is-open');
         prevCard?.setAttribute('aria-expanded', 'false');
-        if (prevIndicator) prevIndicator.style.opacity = '0';
+        content?.classList.add('is-open');
+        card.setAttribute('aria-expanded', 'true');
+        openId = id;
+        return;
       }
 
-      const isOpen = !content?.classList.contains('hidden');
+      const isOpen = content?.classList.contains('is-open');
       if (isOpen) {
-        content?.classList.add('hidden');
+        // Closing: animate wrapper height to 0
+        content?.classList.remove('is-open');
         card.setAttribute('aria-expanded', 'false');
-        if (indicator) indicator.style.opacity = '0';
+        panelWrap?.classList.remove('has-open');
         openId = null;
       } else {
-        content?.classList.remove('hidden');
+        // Opening from closed: animate wrapper height in
+        content?.classList.add('is-open');
         card.setAttribute('aria-expanded', 'true');
-        if (indicator) indicator.style.opacity = '1';
+        panelWrap?.classList.add('has-open');
         openId = id;
       }
     });

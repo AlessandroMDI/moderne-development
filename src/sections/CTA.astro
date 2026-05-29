@@ -1,20 +1,23 @@
 ---
-import Button from '../components/Button.astro';
 ---
 
-<section id="cta" class="bg-brand-green scroll-mt-14 lg:scroll-mt-16 px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
-  <div class="max-w-[1280px] mx-auto">
-
+<section id="cta" class="scroll-mt-14 lg:scroll-mt-16" style="background:#ffffff">
+  <div class="site-inner">
     <div class="flex flex-col items-center text-center">
 
+      <!-- Section label -->
+      <span class="site-lbl mb-4">Get Involved</span>
+
       <!-- Headline -->
-      <h2 class="font-display leading-none tracking-tight uppercase mb-6 lg:mb-8">
-        <span class="block text-[40px] md:text-[60px] lg:text-[80px] text-white">Ready to Build</span>
-        <span class="block text-[40px] md:text-[60px] lg:text-[80px] text-brand-gold">What's Next?</span>
+      <h2 class="site-sh mb-6 lg:mb-8"
+          style="font-size:clamp(30px,5vw,52px);font-weight:700;color:var(--dark)">
+        Ready to Build
+        <span style="color:var(--green);display:block">What's Next?</span>
       </h2>
 
       <!-- Supporting copy -->
-      <p class="font-sans text-sm md:text-base text-white/60 leading-relaxed max-w-[560px] mb-10 lg:mb-12">
+      <p class="mb-10 lg:mb-12"
+         style="font-family:var(--site-font);font-size:15px;line-height:1.75;color:var(--muted);max-width:520px">
         Developer, builder, or investor — if you're done with the old way of building, reach out.
       </p>
 
@@ -22,17 +25,23 @@ import Button from '../components/Button.astro';
       <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 lg:mb-12 max-w-[800px]">
 
         <!-- Card: Developers & Builders -->
-        <div class="border border-white/20 p-6 text-left">
-          <h3 class="font-sans text-base font-semibold text-white mb-2">Developers &amp; Builders</h3>
-          <p class="font-sans text-sm text-white/60 leading-relaxed">
+        <div class="p-6 text-left rounded-xl"
+             style="border:1px solid var(--bdr);background:var(--bg2)">
+          <h3 style="font-family:var(--site-font);font-size:15px;font-weight:600;color:var(--dark);margin-bottom:8px">
+            Developers &amp; Builders
+          </h3>
+          <p style="font-family:var(--site-font);font-size:14px;line-height:1.7;color:var(--muted)">
             Deploy MDOS on your next development. We come in early, validate in the field, and build from there.
           </p>
         </div>
 
         <!-- Card: Investors & Partners -->
-        <div class="border border-white/20 p-6 text-left">
-          <h3 class="font-sans text-base font-semibold text-white mb-2">Investors &amp; Partners</h3>
-          <p class="font-sans text-sm text-white/60 leading-relaxed">
+        <div class="p-6 text-left rounded-xl"
+             style="border:1px solid var(--bdr);background:var(--bg2)">
+          <h3 style="font-family:var(--site-font);font-size:15px;font-weight:600;color:var(--dark);margin-bottom:8px">
+            Investors &amp; Partners
+          </h3>
+          <p style="font-family:var(--site-font);font-size:14px;line-height:1.7;color:var(--muted)">
             MDI is actively forming its first-round partner and capital network. If the timing is right, get in touch.
           </p>
         </div>
@@ -43,21 +52,31 @@ import Button from '../components/Button.astro';
       <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
         <button
           data-contact-trigger
-          class="inline-flex items-center justify-center border border-white text-white font-sans text-xs font-semibold tracking-widest uppercase px-8 py-3 bg-transparent hover:bg-white hover:text-text-primary transition-colors duration-200 w-full sm:w-auto"
+          class="w-full sm:w-auto"
+          style="font-family:var(--site-font);background:var(--forest);color:#fff;padding:12px 28px;border-radius:6px;font-size:14px;font-weight:500;border:none;cursor:pointer;transition:opacity 150ms"
+          onmouseover="this.style.opacity='0.85'"
+          onmouseout="this.style.opacity='1'"
         >
           Work With Us
         </button>
-        <Button href="#platform" variant="secondary" fullWidthMobile={true}>Request Access to Alpha &rarr;</Button>
+        <a
+          href="#"
+          class="w-full sm:w-auto text-center"
+          style="font-family:var(--site-font);color:var(--dark);padding:12px 28px;border-radius:6px;font-size:14px;font-weight:500;border:1px solid var(--bdr);cursor:pointer;transition:border-color 150ms;text-decoration:none;display:inline-flex;align-items:center;justify-content:center"
+          onmouseover="this.style.borderColor='rgba(13,19,16,0.3)'"
+          onmouseout="this.style.borderColor='var(--bdr)'"
+        >
+          Request Access to Alpha &rarr;
+        </a>
       </div>
 
       <!-- Footer -->
-      <div class="mt-16 pt-8 border-t border-white/10 w-full">
-        <p class="font-sans text-[11px] text-white/30 tracking-wide">
-          &copy; {new Date().getFullYear()} MDI
+      <div class="mt-16 pt-8 w-full" style="border-top:1px solid var(--bdr)">
+        <p style="font-family:var(--site-font);font-size:11px;color:var(--muted);letter-spacing:0.04em">
+          &copy; {new Date().getFullYear()} MDI. All rights reserved.
         </p>
       </div>
 
     </div>
-
   </div>
 </section>

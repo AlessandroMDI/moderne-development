@@ -72,67 +72,92 @@ const team = [
 ];
 ---
 
-<section id="team" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16 px-5 pt-12 pb-16 md:px-10 md:pt-14 md:pb-20 lg:px-20 lg:pt-20 lg:pb-28">
-  <div class="max-w-[1280px] mx-auto">
+<section id="team" class="scroll-mt-14 lg:scroll-mt-16" style="background:var(--bg2)">
+  <div class="site-inner">
 
     <!-- Section header -->
     <div class="mb-12 lg:mb-16">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="block w-6 h-px bg-brand-gold"></span>
-        <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">Our Team</span>
-      </div>
-      <h2 class="font-display text-[28px] md:text-[36px] lg:text-[48px] leading-none tracking-tight uppercase text-text-primary mb-6">
-        The People <span class="text-brand-gold">Behind MDI.</span>
+      <span class="site-lbl block mb-4">Our Team</span>
+      <h2 class="site-sh">
+        The People <span style="color:#b8952a">Behind MDI.</span>
       </h2>
-      <a
-        href="/team"
-        class="inline-flex items-center justify-center bg-brand-gold text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:brightness-105 transition-all duration-200"
-      >
-        See Full Team
-      </a>
     </div>
 
-    <!-- Team rows (first 3 members only — see /team for full roster) -->
-    <div class="flex flex-col divide-y divide-brand-gold/20">
-      {team.slice(0, 3).map((member) => (
-        <div class="flex flex-col sm:flex-row gap-6 lg:gap-10 py-10 first:pt-0 last:pb-0">
-
-          <Image
-            src={member.img}
-            alt={member.name + ', ' + member.title}
-            widths={[320, 480, 640]}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 240px, 300px"
-            loading="lazy"
-            quality={80}
-            class:list={['w-full sm:w-[240px] lg:w-[300px] shrink-0 aspect-square object-cover object-top', member.grayscale ? 'grayscale' : '']}
-          />
-
-          <div class="flex flex-col justify-center">
-            <!-- Name -->
-            <p class="font-sans text-base lg:text-lg font-semibold text-text-primary leading-snug">{member.name}</p>
-
-            <!-- Title -->
-            <p class="font-sans text-[11px] text-text-secondary uppercase tracking-widest mt-1 mb-4">{member.title}</p>
-
-            <!-- Bio -->
-            {member.bio && (
-              <p class="font-sans text-sm lg:text-base text-text-secondary leading-relaxed">{member.bio}</p>
-            )}
+    <!-- Team grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {team.slice(0, 4).map((member) => (
+        <div class="team-card">
+          <div class="team-img">
+            <Image
+              src={member.img}
+              alt={member.name + ', ' + member.title}
+              widths={[320, 480]}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              loading="lazy"
+              quality={80}
+              class:list={[member.grayscale ? 'grayscale' : '']}
+            />
           </div>
-
+          <div class="team-info">
+            <p class="team-name">{member.name}</p>
+            <p class="team-role">{member.title}</p>
+          </div>
         </div>
       ))}
     </div>
 
-    <!-- Bottom CTA -->
+    <!-- CTA -->
     <div class="mt-10">
-      <a
-        href="/team"
-        class="inline-flex items-center justify-center border border-text-primary text-text-primary font-sans text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-none hover:bg-text-primary hover:text-surface-cream transition-all duration-200"
-      >
-        See Full Team
-      </a>
+      <a href="/team" class="site-btn-s">See Full Team</a>
     </div>
 
   </div>
 </section>
+
+<style>
+  .team-card {
+    border: 1px solid var(--bdr);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg1);
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .team-card:hover {
+    border-color: var(--bdr-g);
+    box-shadow: 0 4px 16px rgba(56,102,63,0.08);
+  }
+
+  .team-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .team-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s;
+    display: block;
+  }
+  .team-card:hover .team-img img {
+    transform: scale(1.03);
+  }
+
+  .team-info {
+    padding: 14px 16px 16px;
+  }
+  .team-name {
+    font-family: var(--site-font);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .team-role {
+    font-family: var(--site-font);
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>

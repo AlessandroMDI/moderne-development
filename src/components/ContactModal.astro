@@ -7,101 +7,145 @@
   role="dialog"
   aria-modal="true"
   aria-label="Contact form"
-  class="fixed inset-0 z-50 flex items-center justify-center px-5 hidden"
+  class="fixed inset-0 z-50 flex items-end sm:items-center justify-center hidden"
 >
   <!-- Backdrop -->
-  <div id="contact-backdrop" class="absolute inset-0 bg-black/70"></div>
+  <div id="contact-backdrop" class="absolute inset-0" style="background:rgba(13,19,16,0.55);backdrop-filter:blur(2px)"></div>
 
   <!-- Panel -->
-  <div class="relative bg-brand-green border border-white/20 w-full max-w-[560px] p-8 md:p-10">
+  <div
+    class="relative w-full sm:max-w-[520px] sm:mx-4"
+    id="contact-panel"
+  >
+    <!-- Mobile drag handle -->
+    <div class="flex justify-center mb-5 sm:hidden">
+      <div style="width:36px;height:4px;border-radius:2px;background:var(--bdr)"></div>
+    </div>
 
     <!-- Close button -->
     <button
       id="contact-close"
       aria-label="Close contact form"
-      class="absolute top-4 right-4 w-11 h-11 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+      class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center transition-colors duration-150"
+      style="color:var(--muted);border-radius:6px"
+      onmouseover="this.style.background='var(--bg2)';this.style.color='var(--dark)'"
+      onmouseout="this.style.background='transparent';this.style.color='var(--muted)'"
     >
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M2 2L18 18M18 2L2 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </button>
 
-    <h2 class="font-display text-[28px] md:text-[36px] leading-none tracking-tight uppercase text-white mb-2">
-      Get in <span class="text-brand-gold">Touch</span>
-    </h2>
-    <p class="font-sans text-sm text-white/50 leading-relaxed mb-8">
-      Tell us a bit about yourself and we'll be in touch shortly.
-    </p>
+    <!-- Header -->
+    <div class="mb-6">
+      <span class="site-lbl block mb-2">Get in Touch</span>
+      <h2 style="font-family:var(--site-font);font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;color:var(--dark)">
+        Let's build something<br/>
+        <span style="color:var(--green)">that lasts.</span>
+      </h2>
+    </div>
 
+    <!-- Form -->
     <form
       name="contact"
       method="POST"
       netlify
       data-netlify="true"
-      class="flex flex-col gap-5"
+      class="flex flex-col"
+      style="gap:16px"
     >
       <input type="hidden" name="form-name" value="contact" />
 
-      <div class="flex flex-col gap-1">
-        <label for="cf-name" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">Name</label>
-        <input
-          id="cf-name"
-          type="text"
-          name="name"
-          required
-          placeholder="Your name"
-          class="bg-transparent border border-white/20 text-white font-sans text-sm px-4 h-12 placeholder:text-white/25 focus:outline-none focus:border-brand-gold transition-colors"
-        />
+      <!-- Name + Email row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2" style="gap:12px">
+        <div class="flex flex-col" style="gap:5px">
+          <label for="cf-name" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Name</label>
+          <input
+            id="cf-name"
+            type="text"
+            name="name"
+            required
+            placeholder="Your name"
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          />
+        </div>
+        <div class="flex flex-col" style="gap:5px">
+          <label for="cf-email" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Email</label>
+          <input
+            id="cf-email"
+            type="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          />
+        </div>
       </div>
 
-      <div class="flex flex-col gap-1">
-        <label for="cf-email" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">Email</label>
-        <input
-          id="cf-email"
-          type="email"
-          name="email"
-          required
-          placeholder="you@company.com"
-          class="bg-transparent border border-white/20 text-white font-sans text-sm px-4 h-12 placeholder:text-white/25 focus:outline-none focus:border-brand-gold transition-colors"
-        />
+      <!-- I am a -->
+      <div class="flex flex-col" style="gap:5px">
+        <label for="cf-interest" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">I am a</label>
+        <div class="relative">
+          <select
+            id="cf-interest"
+            name="interest"
+            required
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 36px 0 12px;width:100%;outline:none;appearance:none;cursor:pointer;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          >
+            <option value="" disabled selected style="color:var(--muted)">Select one</option>
+            <option value="developer-builder">Developer / Builder</option>
+            <option value="investor-partner">Investor / Partner</option>
+            <option value="other">Other</option>
+          </select>
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 5L7 9L11 5" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
 
-      <div class="flex flex-col gap-1">
-        <label for="cf-interest" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">I am a</label>
-        <select
-          id="cf-interest"
-          name="interest"
-          required
-          class="bg-brand-green border border-white/20 text-white font-sans text-sm px-4 h-12 appearance-none focus:outline-none focus:border-brand-gold transition-colors cursor-pointer"
-        >
-          <option value="" disabled selected class="text-white/25">Select one</option>
-          <option value="developer-builder">Developer / Builder</option>
-          <option value="investor-partner">Investor / Partner</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div class="flex flex-col gap-1">
-        <label for="cf-message" class="font-sans text-[11px] font-medium tracking-widest uppercase text-white/40">Message</label>
+      <!-- Message -->
+      <div class="flex flex-col" style="gap:5px">
+        <label for="cf-message" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Message</label>
         <textarea
           id="cf-message"
           name="message"
-          rows="4"
+          rows="3"
           placeholder="Tell us about your project or interest"
-          class="bg-transparent border border-white/20 text-white font-sans text-sm px-4 py-3 placeholder:text-white/25 focus:outline-none focus:border-brand-gold transition-colors resize-none"
+          style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;padding:10px 12px;outline:none;resize:none;transition:border-color 150ms;line-height:1.6"
+          onfocus="this.style.borderColor='var(--green)'"
+          onblur="this.style.borderColor='var(--bdr)'"
         ></textarea>
       </div>
 
-      <button
-        type="submit"
-        class="inline-flex items-center justify-center border border-white text-white font-sans text-xs font-semibold tracking-widest uppercase px-8 py-4 w-full bg-transparent hover:bg-white hover:text-text-primary transition-colors duration-200 mt-2"
-      >
+      <!-- Submit -->
+      <button type="submit" class="site-btn-p w-full justify-center" style="margin-top:4px">
         Send Message
       </button>
     </form>
 
   </div>
 </div>
+
+<style>
+  #contact-panel {
+    background: var(--bg1);
+    border: 1px solid var(--bdr);
+    border-radius: 12px 12px 0 0;
+    padding: 32px 28px 36px;
+    box-shadow: 0 24px 64px rgba(13,19,16,0.18);
+  }
+  @media (min-width: 640px) {
+    #contact-panel {
+      border-radius: 12px;
+    }
+  }
+</style>
 
 <script>
   const modal = document.getElementById('contact-modal');
@@ -119,7 +163,6 @@
     document.body.style.overflow = '';
   }
 
-  // Trigger from "Get in Touch" button(s)
   document.querySelectorAll('[data-contact-trigger]').forEach((el) => {
     el.addEventListener('click', (e) => {
       e.preventDefault();

@@ -81,58 +81,49 @@ const team = [
 >
   <Navbar />
 
-  <!-- Page header -->
-  <section class="bg-surface-cream px-5 md:px-10 lg:px-20 pt-14 lg:pt-16 border-b border-text-divider">
-    <div class="max-w-[1280px] mx-auto pt-16 pb-14 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20">
-
-      <!-- Back nav -->
-      <a
-        href="/"
-        class="inline-flex items-center gap-2 font-sans text-xs font-medium tracking-widest uppercase text-text-secondary hover:text-text-primary transition-colors duration-200 mb-8 lg:mb-10"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Page hero -->
+  <section class="proj-hero">
+    <div class="proj-hero-gradient"></div>
+    <div class="proj-hero-dotgrid"></div>
+    <div class="proj-hero-inner">
+      <a href="/" class="proj-back-nav">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Home
       </a>
-
-      <!-- Page heading -->
-      <h1 class="font-display text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-tight uppercase text-text-primary">
-        Our <span class="text-brand-gold">Team</span>
+      <h1 class="proj-h1">
+        <span class="proj-ln proj-a1">Our</span>
+        <span class="proj-ln proj-a2">Team</span>
       </h1>
-
     </div>
   </section>
 
   <!-- Team grid -->
   <section class="bg-surface-cream px-5 pt-8 pb-16 md:px-10 md:pt-10 md:pb-20 lg:px-20 lg:pt-12 lg:pb-28">
-    <div class="max-w-[1280px] mx-auto">
+    <div class="max-w-[1120px] mx-auto">
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 lg:gap-x-8 lg:gap-y-10">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         {team.map((member) => (
-          <div class="flex flex-col">
-
-            <Image
-              src={member.img}
-              alt={member.name + ', ' + member.title}
-              widths={[320, 480, 640]}
-              sizes="(max-width: 768px) 50vw, 33vw"
-              loading="lazy"
-              quality={80}
-              class:list={['aspect-square w-full object-cover object-top mb-3', member.grayscale ? 'grayscale' : '']}
-            />
-
-            <!-- Name -->
-            <p class="font-sans text-sm lg:text-base font-semibold text-text-primary leading-snug">{member.name}</p>
-
-            <!-- Title -->
-            <p class="font-sans text-[11px] text-text-secondary uppercase tracking-widest mt-1 mb-3">{member.title}</p>
-
-            <!-- Bio -->
-            {member.bio && (
-              <p class="font-sans text-sm text-text-secondary leading-relaxed">{member.bio}</p>
-            )}
-
+          <div class="team-card">
+            <div class="team-img">
+              <Image
+                src={member.img}
+                alt={member.name + ', ' + member.title}
+                widths={[320, 480, 640]}
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                loading="lazy"
+                quality={80}
+                class:list={[member.grayscale ? 'grayscale' : '']}
+              />
+            </div>
+            <div class="team-info">
+              <p class="team-name">{member.name}</p>
+              <p class="team-role">{member.title}</p>
+              {member.bio && (
+                <p class="team-bio">{member.bio}</p>
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -143,3 +134,136 @@ const team = [
   <Footer />
 
 </Layout>
+
+<style is:global>
+  @keyframes projPulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1; }
+  }
+  @keyframes projSlideUp {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes projFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .proj-hero {
+    background: var(--bg1);
+    position: relative;
+    overflow: hidden;
+    padding: 140px 52px 100px;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .proj-hero { padding: 120px 20px 80px; }
+  }
+  .proj-hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,102,63,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .proj-hero-dotgrid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(56,102,63,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .proj-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .proj-back-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--site-font);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 150ms;
+    opacity: 0;
+    animation: projFadeUp 0.7s 0.2s both;
+  }
+  .proj-back-nav:hover { color: var(--dark); }
+  .proj-h1 {
+    font-family: var(--site-font);
+    font-size: clamp(36px, 5.5vw, 68px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--dark);
+    overflow: hidden;
+  }
+  .proj-ln {
+    display: block;
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  .proj-a1 { animation: projSlideUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.45s both; color: var(--dark); }
+  .proj-a2 { animation: projSlideUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.58s both; color: #b8952a; }
+  .team-card {
+    border: 1px solid var(--bdr);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg1);
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .team-card:hover {
+    border-color: var(--bdr-g);
+    box-shadow: 0 4px 16px rgba(56,102,63,0.08);
+  }
+
+  .team-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .team-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s;
+    display: block;
+  }
+  .team-card:hover .team-img img {
+    transform: scale(1.03);
+  }
+
+  .team-info {
+    padding: 14px 16px 16px;
+  }
+  .team-name {
+    font-family: var(--site-font);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .team-role {
+    font-family: var(--site-font);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .team-bio {
+    font-family: var(--site-font);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+</style>

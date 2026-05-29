@@ -1,6 +1,4 @@
 ---
-import Button from '../components/Button.astro';
-
 const capabilities = [
   {
     num: '01',
@@ -35,58 +33,48 @@ const capabilities = [
 ];
 ---
 
-<section id="platform" class="bg-brand-green scroll-mt-14 lg:scroll-mt-16 px-5 py-16 md:px-10 md:py-20 lg:px-20 lg:py-28">
-  <div class="max-w-[1280px] mx-auto">
+<section id="platform" class="scroll-mt-14 lg:scroll-mt-16" style="background:var(--bg1)">
+  <div class="site-inner">
 
     <!-- Section header -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 mb-14 lg:mb-20">
 
       <div>
-        <!-- Eyebrow -->
-        <div class="flex items-center gap-3 mb-5">
-          <span class="block w-6 h-px bg-brand-gold"></span>
-          <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">MDOS</span>
-        </div>
-
-        <h2 class="font-display text-[36px] md:text-[44px] lg:text-[52px] leading-none tracking-tight uppercase text-white">
+        <span class="site-lbl block mb-4">MDOS</span>
+        <h2 class="site-sh">
           One System.<br />
-          <span class="text-brand-gold">Every Stage</span> of the Build.
+          <span style="color:#b8952a">Every Stage</span> of the Build.
         </h2>
       </div>
 
       <div class="lg:pt-1 flex flex-col justify-between gap-8">
         <div>
-          <p class="font-sans text-base font-semibold tracking-wide uppercase text-white mb-4">MDI Operating System</p>
-          <p class="font-sans text-base text-white/70 leading-relaxed text-left">
+          <p class="site-lbl mb-3">MDI Operating System</p>
+          <p class="site-sp">
             MDOS is MDI's proprietary platform connecting AI-driven site analysis, automated BIM, and robotic construction into a single pipeline. Not a tool you buy or license. It is the operating layer MDI deploys on every project, from land acquisition to final delivery.
           </p>
         </div>
-        <div class="flex lg:justify-end">
-          <Button href="/platform" class="w-full sm:w-auto">Explore MDOS</Button>
+        <div>
+          <a href="/platform" class="site-btn-p">Explore MDOS</a>
         </div>
       </div>
 
     </div>
 
-    <!-- Label -->
-    <div class="mb-10">
-      <h3 class="font-display text-[28px] md:text-[32px] uppercase tracking-tight text-white">Platform Capabilities</h3>
+    <!-- Capabilities label -->
+    <div class="mb-8">
+      <span class="site-lbl">Platform Capabilities</span>
     </div>
 
-    <!-- Capabilities: 3D bordered cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-visible pl-[6px] pb-[6px]">
+    <!-- Capabilities: flat cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {capabilities.map((cap) => (
-        <div class="card-3d-wrapper">
-          <div class="card-3d-depth"></div>
-          <div class="card-3d-left"></div>
-          <div class="card-3d-bottom"></div>
-          <div class="card-3d-face bg-brand-green border border-white/15 border-t-2 border-t-brand-gold p-6 lg:p-8">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="font-display text-[18px] text-brand-gold leading-none shrink-0">{cap.num}</span>
-              <h3 class="font-sans text-sm font-semibold text-white leading-snug">{cap.title}</h3>
-            </div>
-            <p class="font-sans text-sm text-white/80 leading-relaxed">{cap.body}</p>
+        <div class="site-card">
+          <div class="flex items-start gap-3 mb-3">
+            <span style="font-family:var(--site-font);font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--green);padding-top:3px;flex-shrink:0">{cap.num}</span>
+            <h3 style="font-family:var(--site-font);font-size:14px;font-weight:600;color:var(--dark);line-height:1.4">{cap.title}</h3>
           </div>
+          <p style="font-family:var(--site-font);font-size:13px;line-height:1.7;color:var(--muted)">{cap.body}</p>
         </div>
       ))}
     </div>

@@ -19,50 +19,79 @@ const features = [
 ];
 ---
 
-<section id="what-we-do" class="bg-surface-cream scroll-mt-14 lg:scroll-mt-16">
+<section id="what-we-do" class="scroll-mt-14 lg:scroll-mt-16" style="background:var(--bg2)">
   <Ticker />
 
-  <div class="flex flex-col lg:flex-row">
+  <div class="site-inner">
+    <div class="wwd-grid">
 
-    <!-- Left: full-bleed team photo -->
-    <div class="lg:w-1/2 relative min-h-[320px] lg:min-h-[680px]">
-      <Image
-        src={teamImg}
-        alt="The MDI team"
-        class="absolute inset-0 w-full h-full object-cover object-top"
-        loading="lazy"
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 1024px) 50vw, 100vw"
-      />
-    </div>
-
-    <!-- Right: content -->
-    <div class="lg:w-1/2 px-5 py-12 md:px-10 md:py-16 lg:px-16 lg:py-20 flex flex-col justify-center">
-
-      <!-- Eyebrow -->
-      <div class="flex items-center gap-3 mb-5">
-        <span class="block w-6 h-px bg-brand-gold"></span>
-        <span class="font-sans text-[11px] font-medium tracking-widest uppercase text-brand-gold">What We Do</span>
+      <!-- Left: image card -->
+      <div class="wwd-imgbox">
+        <Image
+          src={teamImg}
+          alt="The MDI team"
+          loading="lazy"
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
       </div>
 
-      <h2 class="font-display text-[36px] md:text-[44px] lg:text-[52px] leading-none tracking-tight uppercase text-text-primary mb-6 lg:mb-8">
-        The Operating System<br />for Modern Construction.
-      </h2>
+      <!-- Right: content -->
+      <div class="flex flex-col justify-center">
 
-      <p class="font-sans text-base leading-relaxed text-text-primary mb-10 max-w-[540px]">
-        MDI develops MDOS, a platform that connects AI-enabled robotics, 5D-BIM automation, proven building systems, and the people who actually build. We partner directly with developers and builders. Projects run faster and finish closer to plan.
-      </p>
+        <span class="site-lbl block mb-4">What We Do</span>
 
-      <!-- Feature cards -->
-      <div class="flex flex-col gap-0 border-t border-text-divider">
-        {features.map(f => (
-          <div class="border-b border-text-divider py-5 pl-4 border-l-2 border-l-brand-gold ml-0 -ml-0">
-            <h3 class="font-sans text-sm font-semibold text-text-primary mb-1">{f.title}</h3>
-            <p class="font-sans text-sm text-text-secondary leading-relaxed">{f.body}</p>
-          </div>
-        ))}
+        <h2 class="site-sh mb-6 lg:mb-8">
+          The Operating System<br />for Modern Construction.
+        </h2>
+
+        <p style="font-family:var(--site-font);font-size:15px;line-height:1.75;color:var(--muted);max-width:520px;margin-bottom:2rem">
+          MDI develops MDOS, a platform that connects AI-enabled robotics, 5D-BIM automation, proven building systems, and the people who actually build. We partner directly with developers and builders. Projects run faster and finish closer to plan.
+        </p>
+
+        <!-- Feature cards -->
+        <div class="flex flex-col gap-3">
+          {features.map(f => (
+            <div class="site-card">
+              <h3 style="font-family:var(--site-font);font-size:14px;font-weight:600;color:var(--dark);margin-bottom:6px">{f.title}</h3>
+              <p style="font-family:var(--site-font);font-size:13px;line-height:1.7;color:var(--muted)">{f.body}</p>
+            </div>
+          ))}
+        </div>
+
       </div>
-
     </div>
   </div>
 </section>
+
+<style>
+  .wwd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .wwd-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .wwd-imgbox {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 480px;
+    border: 1px solid var(--bdr);
+  }
+  @media (max-width: 900px) {
+    .wwd-imgbox { height: 280px; }
+  }
+  .wwd-imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.5s;
+  }
+  .wwd-imgbox:hover img { transform: scale(1.02); }
+
+</style>
