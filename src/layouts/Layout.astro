@@ -4,11 +4,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  heroPreload?: { src: string; srcset: string };
 }
 
 const {
   title = 'MDI | Build Smarter. Scale Faster.',
   description = 'MDI is building the next-generation operating system for modern construction — integrating AI, robotics, and digital workflows into real estate development.',
+  heroPreload,
 } = Astro.props;
 ---
 
@@ -35,14 +37,15 @@ const {
 
     <title>{title}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" />
-    </noscript>
+    <!-- Fonts: self-hosted, no external DNS round-trips -->
+    <link rel="preload" href="/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Hero image preload: injected by pages that use a hero (avoids stale hashes) -->
+    {heroPreload && (
+      <link rel="preload" as="image" href={heroPreload.src} imagesrcset={heroPreload.srcset} imagesizes="100vw" />
+    )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>

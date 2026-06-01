@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import netlify from '@astrojs/netlify';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
@@ -8,8 +7,13 @@ import icon from 'astro-icon';
 export default defineConfig({
   output: 'static',
   integrations: [icon()],
-  adapter: netlify(),
-vite: {
+  vite: {
     plugins: [tailwindcss()],
+  },
+  image: {
+    // Use sharp for build-time image optimization — no runtime functions
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
   },
 });

@@ -1,4 +1,6 @@
 ---
+import { getImage } from 'astro:assets';
+import heroImg from '../assets/images/hero/hero.jpg';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../sections/Hero.astro';
@@ -9,9 +11,20 @@ import Projects from '../sections/Projects.astro';
 import Team from '../sections/Team.astro';
 import CTA from '../sections/CTA.astro';
 import ContactModal from '../components/ContactModal.astro';
+
+// Pre-generate hero image for <link rel="preload"> in <head>
+// This ensures the browser starts fetching the LCP image immediately
+const hero1920 = await getImage({ src: heroImg, width: 1920, format: 'webp', quality: 85 });
+const hero1280 = await getImage({ src: heroImg, width: 1280, format: 'webp', quality: 85 });
+const hero768  = await getImage({ src: heroImg, width: 768,  format: 'webp', quality: 85 });
+const hero375  = await getImage({ src: heroImg, width: 375,  format: 'webp', quality: 85 });
+const heroPreload = {
+  src: hero1920.src,
+  srcset: `${hero375.src} 375w, ${hero768.src} 768w, ${hero1280.src} 1280w, ${hero1920.src} 1920w`,
+};
 ---
 
-<Layout>
+<Layout heroPreload={heroPreload}>
   <Navbar />
   <Hero />
   <WhatWeDo />
