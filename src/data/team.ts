@@ -43,9 +43,9 @@ export const team = [
   {
     img: zackaryImg,
     name: 'Zackary Howley',
-    title: 'Construction Director',
+    title: 'Director of Construction',
     grayscale: true,
-    bio: "General Contractor for the first Apis Cor 3D-printed model home in Florida, with project credits at Blue Origin and SpaceX Launchpad 39A. One of Florida's youngest licensed crane operators.",
+    bio: "A decade of field experience across heavy equipment, concrete piling, and structural assembly — from large-scale commercial projects to mission-critical builds for Blue Origin and SpaceX. General Contractor for the first 3D-printed model home in Florida and one of the state's youngest licensed crane operators.",
   },
   {
     img: jamesImg,
