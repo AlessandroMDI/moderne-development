@@ -205,6 +205,29 @@ const tickerItems = [
     </div>
   </section>
 
+  <!-- ── PIPELINE ──────────────────────────────────────────── -->
+  <section id="pipeline" class="plat-bg2">
+    <div class="si">
+      <div class="pipe-head">
+        <div>
+          <p class="plat-lbl anim">End-to-End Workflow</p>
+          <h2 class="plat-sh anim">From parcel to completed build.</h2>
+        </div>
+        <p class="plat-sp anim">Six connected stages. No gaps, no handoffs, no re-authoring between systems. One input, one pipeline, one output.</p>
+      </div>
+      <div class="pipe-steps">
+        {pipelineSteps.map(step => (
+          <div class="pipe-step anim">
+            <div class="pipe-num">{step.num}</div>
+            <div class="pipe-t">{step.title}</div>
+            <div class="pipe-d">{step.desc}</div>
+            <div class="pipe-bar"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ── MODULES ───────────────────────────────────────────── -->
   <section id="modules" class="plat-bg1">
     <div class="si">
@@ -243,29 +266,6 @@ const tickerItems = [
               <img src={typeof m.img === 'string' ? m.img : m.img.src} alt={m.imgAlt} loading="lazy" />
               <div class="module-label">Module {String(i + 1).padStart(2, '0')}</div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PIPELINE ──────────────────────────────────────────── -->
-  <section id="pipeline" class="plat-bg2">
-    <div class="si">
-      <div class="pipe-head">
-        <div>
-          <p class="plat-lbl anim">End-to-End Workflow</p>
-          <h2 class="plat-sh anim">From parcel to completed build.</h2>
-        </div>
-        <p class="plat-sp anim">Six connected stages. No gaps, no handoffs, no re-authoring between systems. One input, one pipeline, one output.</p>
-      </div>
-      <div class="pipe-steps">
-        {pipelineSteps.map(step => (
-          <div class="pipe-step anim">
-            <div class="pipe-num">{step.num}</div>
-            <div class="pipe-t">{step.title}</div>
-            <div class="pipe-d">{step.desc}</div>
-            <div class="pipe-bar"></div>
           </div>
         ))}
       </div>
