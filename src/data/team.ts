@@ -1,0 +1,70 @@
+import edgarImg from '../assets/images/team/edgar-munoz.jpg';
+import alessandroImg from '../assets/images/team/alessandro-lannes.jpg';
+import robertImg from '../assets/images/team/robert-mechielsen.jpg';
+import danielImg from '../assets/images/team/daniel-white.jpg';
+import zackaryImg from '../assets/images/team/zackary-howley.jpg';
+import paulCejasImg from '../assets/images/team/paul-cejas.jpg';
+import jamesImg from '../assets/images/team/james-guiang.jpg';
+import paulGroeplerImg from '../assets/images/team/paul-groepler.jpg';
+import cristianImg from '../assets/images/team/cristian-perez.jpg';
+
+export const team = [
+  {
+    img: edgarImg,
+    name: 'Edgar Munoz',
+    title: 'Founder / CEO',
+    bio: 'Ten-plus years in construction technology — former CEO of Aeronyde Corporation, Head of Business Development at Apis Cor, and a sitting ASTM Additive Construction Committee member. Has raised thirteen million dollars across early-stage ventures.',
+  },
+  {
+    img: alessandroImg,
+    name: 'Alessandro Lannes',
+    title: 'Founder / COO',
+    bio: 'Brings consulting-era expertise in technology stack integration and workflow optimization to real estate development. Previously architected cloud-based operational systems for B2B and e-commerce organizations, driving rapid revenue growth.',
+  },
+  {
+    img: paulCejasImg,
+    name: 'Paul Cejas',
+    title: 'CTO / Board Member',
+    bio: 'Former Chief Engineer at Boeing Defense Systems, where he led development of the QF-16 target drone and MQ-28 Ghost Bat. Now consulting for green technology startups.',
+  },
+  {
+    img: robertImg,
+    name: 'Robert Mechielsen',
+    title: 'Innovation Director',
+    bio: "Thirty-plus years designing modular, smart, and net-zero buildings across global markets. Founder of VERTIKAAL (5D BIM software). Designed the Hi'ilani EcoHouse — the first concrete-built carbon-neutral home in the USA.",
+  },
+  {
+    img: danielImg,
+    name: 'Daniel White',
+    title: 'Sales Director',
+    grayscale: true,
+    bio: 'Twenty-plus years in medical devices, manufacturing, and distribution. Managed teams of up to forty-five sales representatives.',
+  },
+  {
+    img: zackaryImg,
+    name: 'Zackary Howley',
+    title: 'Construction Director',
+    grayscale: true,
+    bio: "General Contractor for the first Apis Cor 3D-printed model home in Florida, with project credits at Blue Origin and SpaceX Launchpad 39A. One of Florida's youngest licensed crane operators.",
+  },
+  {
+    img: jamesImg,
+    name: 'James Guiang',
+    title: 'Board of Directors',
+    bio: 'Geophysicist with forty-plus years in oil and gas — Exxon, Amerada Hess, and Conoco. Spent twenty-five years as an investment manager, including a tenure as Managing Director at Millennium Global Investments.',
+  },
+  {
+    img: paulGroeplerImg,
+    name: 'Paul Groepler',
+    title: 'Investor / Board',
+    grayscale: true,
+    bio: "Thirty-plus years across Fortune 500 companies including Motorola, Dell, and IBM. Co-founded seven ventures. B.S. Texas A&M, Master's in Data Science & Economics from MIT.",
+  },
+  {
+    img: cristianImg,
+    name: 'Cristian Perez',
+    title: 'Content Manager',
+    grayscale: true,
+    bio: 'Leads all visualization and media production for MDI — renders, design, photography, and marketing. Has worked on-site and in media across multiple 3D print manufacturer builds, combining hands-on construction experience with a lifelong background in the visual arts.',
+  },
+];
