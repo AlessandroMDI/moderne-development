@@ -13,7 +13,7 @@ export const team = [
     img: edgarImg,
     name: 'Edgar Munoz',
     title: 'Founder / CEO',
-    bio: 'Ten-plus years in construction technology — former CEO of Aeronyde Corporation, Head of Business Development at Apis Cor, and a sitting ASTM Additive Construction Committee member. Has raised thirteen million dollars across early-stage ventures.',
+    bio: 'Ten-plus years in construction technology — former CEO of Aeronyde Corporation, Head of Business Development at a leading 3D print manufacturer, and a sitting ASTM Additive Construction Committee member. Has raised thirteen million dollars across early-stage ventures.',
   },
   {
     img: alessandroImg,
