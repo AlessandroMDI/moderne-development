@@ -36,9 +36,9 @@ export const team = [
   {
     img: danielImg,
     name: 'Daniel White',
-    title: 'Sales Director',
+    title: 'Director of Business Development',
     grayscale: true,
-    bio: 'Twenty-plus years in medical devices, manufacturing, and distribution. Managed teams of up to forty-five sales representatives.',
+    bio: 'Twenty-plus years driving revenue across medical devices, manufacturing, and distribution. Has built and managed teams of up to forty-five representatives, consistently exceeding targets through culture-driven leadership.',
   },
   {
     img: zackaryImg,
