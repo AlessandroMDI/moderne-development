@@ -48,6 +48,13 @@ export const team = [
     bio: "A decade of field experience across heavy equipment, concrete piling, and structural assembly — from large-scale commercial projects to mission-critical builds for Blue Origin and SpaceX. General Contractor for the first 3D-printed model home in Florida and one of the state's youngest licensed crane operators.",
   },
   {
+    img: cristianImg,
+    name: 'Cristian Perez',
+    title: 'Content Manager',
+    grayscale: true,
+    bio: 'Leads all visualization and media production for MDI — renders, design, photography, and marketing. Has worked on-site and in media across multiple 3D print manufacturer builds, combining hands-on construction experience with a lifelong background in the visual arts.',
+  },
+  {
     img: jamesImg,
     name: 'James Guiang',
     title: 'Board of Directors',
@@ -59,12 +66,5 @@ export const team = [
     title: 'Investor / Board',
     grayscale: true,
     bio: "Thirty-plus years across Fortune 500 companies including Motorola, Dell, and IBM. Co-founded seven ventures. B.S. Texas A&M, Master's in Data Science & Economics from MIT.",
-  },
-  {
-    img: cristianImg,
-    name: 'Cristian Perez',
-    title: 'Content Manager',
-    grayscale: true,
-    bio: 'Leads all visualization and media production for MDI — renders, design, photography, and marketing. Has worked on-site and in media across multiple 3D print manufacturer builds, combining hands-on construction experience with a lifelong background in the visual arts.',
   },
 ];
