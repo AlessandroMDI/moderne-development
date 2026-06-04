@@ -60,11 +60,5 @@ export const team = [
     title: 'Board of Directors',
     bio: 'Geophysicist with forty-plus years in oil and gas — Exxon, Amerada Hess, and Conoco. Spent twenty-five years as an investment manager, including a tenure as Managing Director at Millennium Global Investments.',
   },
-  {
-    img: paulGroeplerImg,
-    name: 'Paul Groepler',
-    title: 'Investor / Board',
-    grayscale: true,
-    bio: "Thirty-plus years across Fortune 500 companies including Motorola, Dell, and IBM. Co-founded seven ventures. B.S. Texas A&M, Master's in Data Science & Economics from MIT.",
-  },
+
 ];
