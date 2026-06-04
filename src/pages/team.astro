@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { Image } from 'astro:assets';
 import { team } from '../data/team';
+import alpinaLogoImg from '../assets/images/alpina-capital-white.webp';
 ---
 
 <Layout
@@ -59,6 +60,22 @@ import { team } from '../data/team';
         ))}
       </div>
 
+    </div>
+  </section>
+
+  <!-- ── INVESTOR BANNER ───────────────────────────────────── -->
+  <section class="alpina-banner">
+    <div class="alpina-inner">
+      <p class="alpina-eyebrow">Backed by</p>
+      <Image
+        src={alpinaLogoImg}
+        alt="Alpina Capital"
+        width={180}
+        height={60}
+        class="alpina-logo"
+      />
+      <div class="alpina-divider"></div>
+      <p class="alpina-text">A FINMA-regulated Swiss investment manager, dedicated to adding value in the financial industry through precise, sustainable, and compliance-focused strategies.</p>
     </div>
   </section>
 
@@ -197,4 +214,56 @@ import { team } from '../data/team';
     line-height: 1.6;
     margin-top: 8px;
   }
+  /* ── ALPINA INVESTOR BANNER ─────────────────────────────── */
+  .alpina-banner {
+    background: #0d1f18;
+    position: relative;
+    overflow: hidden;
+  }
+  .alpina-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #38663f 50%, transparent);
+  }
+  .alpina-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  .alpina-eyebrow {
+    font-family: var(--site-font);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6aab75;
+    margin: 0;
+  }
+  .alpina-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.92;
+  }
+  .alpina-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(56,102,63,0.35);
+  }
+  .alpina-text {
+    font-family: var(--site-font);
+    font-size: 13px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.5);
+    max-width: 520px;
+    margin: 0;
+  }
+
 </style>
