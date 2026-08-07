@@ -93,11 +93,8 @@ export default async (req) => {
     return new Response('Bad Request', { status: 400 });
   }
 
-  console.log('RAW BODY:', JSON.stringify(body));
-
-  const payload = body?.payload;
-  const data = payload?.data;
-  const formName = payload?.form_name;
+  const data = body?.data;
+  const formName = body?.form_name;
 
   if (!data?.email) {
     return new Response('OK - no email, skipped', { status: 200 });
