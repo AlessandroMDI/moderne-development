@@ -1,0 +1,258 @@
+---
+const US_STATES = [
+  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia',
+  'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+  'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+];
+---
+
+<!-- Modal overlay — hidden by default, toggled via JS -->
+<div
+  id="alpha-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Alpha access request form"
+  class="fixed inset-0 z-50 flex items-end sm:items-center justify-center hidden"
+>
+  <!-- Backdrop -->
+  <div id="alpha-backdrop" class="absolute inset-0" style="background:rgba(13,19,16,0.55);backdrop-filter:blur(2px)"></div>
+
+  <!-- Panel -->
+  <div
+    class="relative w-full sm:max-w-[520px] sm:mx-4"
+    id="alpha-panel"
+  >
+    <!-- Mobile drag handle -->
+    <div class="flex justify-center mb-5 sm:hidden">
+      <div style="width:36px;height:4px;border-radius:2px;background:var(--bdr)"></div>
+    </div>
+
+    <!-- Close button -->
+    <button
+      id="alpha-close"
+      aria-label="Close alpha access form"
+      class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center transition-colors duration-150"
+      style="color:var(--muted);border-radius:6px"
+      onmouseover="this.style.background='var(--bg2)';this.style.color='var(--dark)'"
+      onmouseout="this.style.background='transparent';this.style.color='var(--muted)'"
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Header -->
+    <div class="mb-6">
+      <span class="site-lbl block mb-2">Request Access</span>
+      <h2 style="font-family:var(--site-font);font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;color:var(--dark)">
+        Get on the<br/>
+        <span style="color:var(--green)">alpha list.</span>
+      </h2>
+    </div>
+
+    <!-- Form -->
+    <form
+      name="alpha-access"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      class="flex flex-col"
+      style="gap:16px"
+    >
+      <input type="hidden" name="form-name" value="alpha-access" />
+      <p class="hidden">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+
+      <!-- First name + Last name row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2" style="gap:12px">
+        <div class="flex flex-col" style="gap:5px">
+          <label for="af-first-name" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">First Name</label>
+          <input
+            id="af-first-name"
+            type="text"
+            name="first_name"
+            required
+            placeholder="First name"
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          />
+        </div>
+        <div class="flex flex-col" style="gap:5px">
+          <label for="af-last-name" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Last Name</label>
+          <input
+            id="af-last-name"
+            type="text"
+            name="last_name"
+            required
+            placeholder="Last name"
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          />
+        </div>
+      </div>
+
+      <!-- Email + Phone row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2" style="gap:12px">
+        <div class="flex flex-col" style="gap:5px">
+          <label for="af-email" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Email</label>
+          <input
+            id="af-email"
+            type="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          />
+        </div>
+        <div class="flex flex-col" style="gap:5px">
+          <label for="af-phone" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Phone</label>
+          <input
+            id="af-phone"
+            type="tel"
+            name="phone"
+            placeholder="(555) 555-5555"
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          />
+        </div>
+      </div>
+
+      <!-- Company Name -->
+      <div class="flex flex-col" style="gap:5px">
+        <label for="af-company" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Company Name</label>
+        <input
+          id="af-company"
+          type="text"
+          name="company"
+          placeholder="Your company"
+          style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+          onfocus="this.style.borderColor='var(--green)'"
+          onblur="this.style.borderColor='var(--bdr)'"
+        />
+      </div>
+
+      <!-- Location -->
+      <div class="flex flex-col" style="gap:5px">
+        <label for="af-state" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Location</label>
+        <div class="relative">
+          <select
+            id="af-state"
+            name="state"
+            required
+            style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 36px 0 12px;width:100%;outline:none;appearance:none;cursor:pointer;transition:border-color 150ms"
+            onfocus="this.style.borderColor='var(--green)'"
+            onblur="this.style.borderColor='var(--bdr)'"
+          >
+            <option value="" disabled selected style="color:var(--muted)">Select a state</option>
+            {US_STATES.map((state) => <option value={state}>{state}</option>)}
+            <option value="Outside of the USA">Outside of the USA</option>
+          </select>
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 5L7 9L11 5" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Country (hidden by default, revealed when "Outside of the USA" is selected) -->
+      <div id="af-country-wrap" class="flex flex-col hidden" style="gap:5px">
+        <label for="af-country" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">Country</label>
+        <input
+          id="af-country"
+          type="text"
+          name="country"
+          placeholder="Your country"
+          style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;height:42px;padding:0 12px;outline:none;transition:border-color 150ms"
+          onfocus="this.style.borderColor='var(--green)'"
+          onblur="this.style.borderColor='var(--bdr)'"
+        />
+      </div>
+
+      <!-- I am interested in -->
+      <div class="flex flex-col" style="gap:5px">
+        <label for="af-interested" style="font-family:var(--site-font);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">I am interested in</label>
+        <textarea
+          id="af-interested"
+          name="interested_in"
+          rows="3"
+          placeholder="Tell us what you're hoping to do with MDOS"
+          style="font-family:var(--site-font);font-size:14px;color:var(--dark);background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;padding:10px 12px;outline:none;resize:none;transition:border-color 150ms;line-height:1.6"
+          onfocus="this.style.borderColor='var(--green)'"
+          onblur="this.style.borderColor='var(--bdr)'"
+        ></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="site-btn-p w-full justify-center" style="margin-top:4px">
+        Request Access
+      </button>
+    </form>
+
+  </div>
+</div>
+
+<style>
+  #alpha-panel {
+    background: var(--bg1);
+    border: 1px solid var(--bdr);
+    border-radius: 12px 12px 0 0;
+    padding: 32px 28px 36px;
+    box-shadow: 0 24px 64px rgba(13,19,16,0.18);
+  }
+  @media (min-width: 640px) {
+    #alpha-panel {
+      border-radius: 12px;
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('alpha-modal');
+  const backdrop = document.getElementById('alpha-backdrop');
+  const closeBtn = document.getElementById('alpha-close');
+  const stateSelect = document.getElementById('af-state') as HTMLSelectElement | null;
+  const countryWrap = document.getElementById('af-country-wrap');
+  const countryInput = document.getElementById('af-country') as HTMLInputElement | null;
+
+  function openModal() {
+    modal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function closeModal() {
+    modal?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-alpha-trigger]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  backdrop?.addEventListener('click', closeModal);
+  closeBtn?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  stateSelect?.addEventListener('change', () => {
+    const isOutsideUSA = stateSelect.value === 'Outside of the USA';
+    countryWrap?.classList.toggle('hidden', !isOutsideUSA);
+    if (countryInput) countryInput.required = isOutsideUSA;
+  });
+</script>
