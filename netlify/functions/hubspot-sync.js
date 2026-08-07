@@ -108,11 +108,13 @@ export default async (req) => {
   }
 
   const properties = mapToHubSpotProperties(formName, data);
+  console.log('Properties being sent:', JSON.stringify(properties));
 
   try {
     const createRes = await createContact(token, properties);
 
     if (createRes.ok) {
+      console.log('HubSpot response:', JSON.stringify(await createRes.clone().json()));
       return new Response('OK - contact created', { status: 200 });
     }
 
@@ -132,6 +134,7 @@ export default async (req) => {
         return new Response('HubSpot Update Failed', { status: 502 });
       }
 
+      console.log('HubSpot response:', JSON.stringify(await updateRes.clone().json()));
       return new Response('OK - contact updated', { status: 200 });
     }
 
