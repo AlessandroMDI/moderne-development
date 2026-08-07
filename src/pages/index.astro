@@ -11,6 +11,7 @@ import Projects from '../sections/Projects.astro';
 import Team from '../sections/Team.astro';
 import CTA from '../sections/CTA.astro';
 import ContactModal from '../components/ContactModal.astro';
+import AlphaAccessModal from '../components/AlphaAccessModal.astro';
 
 // Pre-generate hero image for <link rel="preload"> in <head>
 // This ensures the browser starts fetching the LCP image immediately
@@ -34,4 +35,5 @@ const heroPreload = {
   <Team />
   <CTA />
   <ContactModal />
+  <AlphaAccessModal />
 </Layout>
