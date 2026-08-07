@@ -93,6 +93,8 @@ export default async (req) => {
     return new Response('Bad Request', { status: 400 });
   }
 
+  console.log('RAW BODY:', JSON.stringify(body));
+
   const payload = body?.payload;
   const data = payload?.data;
   const formName = payload?.form_name;
